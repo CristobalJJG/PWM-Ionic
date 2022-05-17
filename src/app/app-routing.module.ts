@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => 
       import('./objeto/objeto.module').then( m => m.ObjetoPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
 ];
 
 /* const routes: Routes = [

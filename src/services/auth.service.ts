@@ -12,23 +12,27 @@ import { FirestoreService } from './firestore.service';
 })
 
 export class AuthService {
-  private _user!: User;
-  public correo = "";
+  private _user: User = undefined;
   public isLogged:any = false;
 
-  constructor(private auth: AngularFireAuth, 
-    private router:Router,
+  constructor(private auth: AngularFireAuth,
     private db: AngularFirestore,){
     auth.authState.subscribe( user => (this.isLogged = user));
   }
 
   async SignIn(user:User){
     try{
-      this.correo = user.correo; 
-      return await this.auth.signInWithEmailAndPassword(
+      const auth_ = getAuth()
+      setPersistence(auth_, browserSessionPersistence)
+      .then(() => {
+        this._user=user;
+        localStorage.setItem(this._user.correo, this._user.password);
+        return signInWithEmailAndPassword(auth_,
         user.correo.toString().toLowerCase().trim(), 
         user.password
       );
+      })
+      
     } catch (err){
       console.error('Error on login: ', err);
       return null;
@@ -37,7 +41,6 @@ export class AuthService {
 
   async RegisterNewUser(user:User){
     try{
-      this.correo = user.correo; 
       this._user = user;
       this.addNewUser(user);
       return await this.auth.createUserWithEmailAndPassword(
@@ -61,6 +64,9 @@ export class AuthService {
   }
 
   get user(): User {
+    if(this._user == undefined){
+      return undefined;
+    }
     return this._user;
   }
  

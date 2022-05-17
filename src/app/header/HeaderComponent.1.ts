@@ -34,6 +34,8 @@ export class HeaderComponent {
   }
 
   changeRoute(){
+    console.log("Se ha decidido cambiar de ruta");
+    
     if(this.auth_.user == undefined){
       this.router.navigate(["/login"]);
     }else{

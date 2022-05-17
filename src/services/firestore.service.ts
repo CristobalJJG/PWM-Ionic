@@ -18,10 +18,10 @@ export class FirestoreService {
     /* public json:JSONService */) { }
 
   async getAllProducts(){
-    return new Promise<any>((resolve) => {
+    return await new Promise<any>((resolve) => {
       this.db.collection('Objetos')
       .valueChanges({ idField: 'id' })
-      .subscribe(users => resolve(users));
+      .subscribe(products => resolve(products));
     })
   }
 
@@ -44,16 +44,6 @@ export class FirestoreService {
     });
   } */
 
-  addNewUser(user:User){
-    this.db.collection("Usuarios")
-      .doc(user.correo)
-      .set({
-        nombre:user.nombre,
-        favoritos: user.favorito,
-        cesta: user.cesta
-      });
-  }
-
   addNewProduct(product:NewProduct){
     this.db.collection("Objetos")
       .doc(product.id)
@@ -64,27 +54,6 @@ export class FirestoreService {
         precio:product.precio,
         categoria:product.categoria,
         mainPhoto:product.mainPhoto,
-      });
-  }
-
-  addProduct(id:number,
-    nombre_:string,
-    descripcion_:string,
-    precio_:number,
-    categoria_:string,
-    empresa_:string,
-    mainPhoto_:string,
-    altPhotos_:[]){
-      this.db.collection("Objetos")
-      .doc(id + "")
-      .set({
-        nombre:nombre_,
-        descripcion:descripcion_,
-        precio:precio_,
-        categoria:categoria_,
-        empresa: empresa_,
-        mainPhoto:mainPhoto_,
-        altPhotos:altPhotos_
       });
   }
 }
