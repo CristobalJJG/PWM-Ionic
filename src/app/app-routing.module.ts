@@ -38,6 +38,10 @@ const routes: Routes = [
       import('./objeto/objeto.module').then( m => m.ObjetoPageModule)
   },
   {
+    path: 'add-object',
+    loadChildren: () => import('./add-object/add-object.module').then( m => m.AddObjectPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },

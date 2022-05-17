@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-object</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!--Fondo gris-->
+<div class="f-gris">
+  <form #form="ngForm">
+
+      <!-- Nombre del objeto -->
+      <div class="grid">
+          <label for="objNombre">Nombre del objeto</label>
+          <input type="text" id="objNombre" placeholder="Abrigo marrón"
+              name="nombre" [(ngModel)]="product.nombre" #nombre="ngModel"
+              pattern="[a-zA-Z0-9 ]*" required/>
+          <!--Validaciones-->
+          <div class="invalid-feedback" *ngIf="nombre.invalid && nombre.dirty">
+              <p *ngIf="nombre.errors?.['required']">
+                  Es obligatorio escribir el nombre del producto.
+              </p> 
+              <p *ngIf="nombre.errors?.['pattern']">
+                  No es un nombre válido.
+              </p> 
+          </div>
+      </div>
+
+      <!-- Nombre de la descripcion -->
+      <div class="grid">
+          <label for="descripcion">Descripción</label>
+          <textarea name="descripcion" id="descripcion" placeholder="¿Necesitas realmente un abrigo?"
+              name="descripcion" [(ngModel)]="product.descripcion" #descripcion="ngModel" required></textarea>
+          <!--Validaciones-->
+          <div class="invalid-feedback" *ngIf="descripcion.invalid && descripcion.dirty">
+              <p *ngIf="descripcion.errors?.['required']">
+                  Es obligatorio escribir una descripción del producto.
+              </p>
+          </div>
+      </div>
+
+      <!-- Ubicación -->
+      <div class="grid">
+          <p style="margin: 0; margin-top: 15px;">¿A qué ubicaciones llegaría?</p>
+          <form action="addUbicación">
+              <div class="grid">
+                  <label for="ubicacion" style="margin: 0;">Ubicación</label>
+                  <input type="text" name="addUbi" pattern="[A-Za-z0-9 áéíóúÁÉÍÓÚ/-]*"
+                      #ubi = "ngModel" [(ngModel)] = "addUbi"/>
+                  <input type="submit" [disabled]="ubi.errors" value="Añadir" (click)="addUbicacion();">
+              </div>
+              <!--Validaciones-->
+              <div class="invalid-feedback" *ngIf="ubi.invalid && ubi.dirty">
+                  <p *ngIf="ubi.errors?.['pattern']">
+                      La ubicación solo puede tener los caracteres "A-Za-z0-9 áéíóúÁÉÍÓÚ/-"
+                  </p>
+              </div>
+          </form>
+          <div id="listaUbis" class="grid">
+              <label for="ubisTotal">Ubicaciones</label>
+              <ul>
+                  <li *ngFor="let ubi of product.ubicaciones" class="ubi">
+                      {{ubi}}
+                  </li>
+              </ul>
+          </div>
+      </div>
+
+      <!-- Costo -->
+      <div class="grid">
+          <div class="grid">
+              <label for="costo">Costo</label>
+              <input type="number" id="costo" name="costo" 
+                  #costo = "ngModel" [(ngModel)] = "product.precio"/>
+              <!--Validaciones-->
+              <div class="invalid-feedback" *ngIf="costo.invalid && costo.dirty">
+                  <p *ngIf="costo.errors?.['pattern']">
+                      La ubicación solo puede tener los caracteres "A-Za-z0-9 áéíóúÁÉÍÓÚ/-"
+                  </p>
+              </div>
+          </div>
+          <div class="grid">
+              <label for="etiqueta">Etiqueta</label>
+              <select name="etiqueta" id="etiqueta">
+                  <option value="1">Abrigo</option>
+                  <option value="2">Chaleco</option>
+                  <option value="3">Camisa</option>
+                  <option value="4">Pantalón</option>
+              </select>
+          </div>
+      </div>
+
+      <!--Agregar imagen-->
+      <div>
+          <form action="addPicture">
+              <div class="grid">
+                  <input type="file" [disabled]="nombre.invalid && (nombre.dirty || nombre.touched)" 
+                      (change)="onUpload($event)" accept="image/*" id="mainPhoto"/>
+              </div>
+              <div class="grid" id="productImages">
+                  <div><img src="{{img | async}}" class="image"></div>
+              </div>
+          </form>
+      </div>
+
+      <!--Botón de submit-->
+      <div class="grid">
+          <input type="submit" [disabled]="form.invalid"
+          name="addObject" id="addObject" (click)="addObject()"/>
+      </div>
+  </form>
+</div>
+</ion-content>

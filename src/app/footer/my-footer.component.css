@@ -1,0 +1,12 @@
+#footer {
+    background-color: #b6b6b6;
+    position: inherit;
+    width: 100%;
+    height: 65px;
+    bottom: 0;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    font-size: small;
+}
