@@ -33,14 +33,26 @@ const routes: Routes = [
       import('./cesta/cesta.module').then( m => m.CestaPageModule)
   },
   {
-    path: 'objeto/:id',
-    loadChildren: () => import('./objeto/objeto.module').then( m => m.ObjetoPageModule)
+    path: 'objeto',
+    loadChildren: () => 
+      import('./objeto/objeto.module').then( m => m.ObjetoPageModule)
   },
 ];
 
+/* const routes: Routes = [
+  { path: '', redirectTo: 'catalogo', pathMatch: 'full' },
+  { path: 'login',component:LoginPage },
+  { path: 'catalogo', component:CatalogoPage },
+  { path: 'perfil', component:PerfilPage },
+  { path: 'favoritos', component:FavoritosPage },
+  { path: 'cesta', component: CestaPage},
+  { path: 'objeto/:id', component: ObjetoPage},
+]; */
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(
+      routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

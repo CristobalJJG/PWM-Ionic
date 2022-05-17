@@ -18,7 +18,6 @@ import { ReusableModule } from './reusable/reusable.module';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    RouterModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage'
+import { User } from '../interfaces/user';
 import { NewProduct } from 'src/interfaces/newProduct';
 import { AuthService } from './auth.service';
 //import { JSONService } from './json.service';
@@ -42,6 +43,16 @@ export class FirestoreService {
       
     });
   } */
+
+  addNewUser(user:User){
+    this.db.collection("Usuarios")
+      .doc(user.correo)
+      .set({
+        nombre:user.nombre,
+        favoritos: user.favorito,
+        cesta: user.cesta
+      });
+  }
 
   addNewProduct(product:NewProduct){
     this.db.collection("Objetos")

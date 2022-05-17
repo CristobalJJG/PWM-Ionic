@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { CatalogoPageRoutingModule } from './catalogo-routing.module';
 
 import { CatalogoPage } from './catalogo.page';
-import { HeaderComponent } from "../header/HeaderComponent.1";
 import { ReusableModule } from '../reusable/reusable.module';
 
 @NgModule({

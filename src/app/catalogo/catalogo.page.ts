@@ -12,7 +12,11 @@ export class CatalogoPage {
 
   constructor(private dbService:FirestoreService){
     //dbService.addJSONToFirebase();
-    this.dbService.getAllProducts()
+    this.getProducts();
+  }
+
+  async getProducts(){
+    await this.dbService.getAllProducts()
     .then(data => {
       this.productos = data;
     });

@@ -15,7 +15,7 @@ export class PerfilPage implements OnInit {
 
   constructor(private auth:AuthService,
     private storage: AngularFireStorage) { 
-    this.userName = this.auth.getUsername();
+    this.userName = this.auth.user.nombre;
     try{
       this.getUserImg(this.userName);
     }catch(err){
