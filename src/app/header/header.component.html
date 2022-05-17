@@ -1,0 +1,36 @@
+<div class="cab-fondo">
+    <!--Nombre de la tienda-->
+    <a href="/catalogo" class="nombre">
+        <p>Nano's</p>
+    </a>
+    <!--Parte del usuario-->
+    <div>
+        <a routerLink="/perfil">
+            <div class="cuadro">
+                <img src="{{userImg}}" id="foto-u" class="foto">
+            </div>
+            <div>
+                <p id="nombreUser" class="userName">{{auth_.getUsername()}}</p>
+            </div>
+        </a>
+    </div>
+    <div class="sep"></div>
+    <!--Favoritos-->
+    <div>
+        <ion-router url="/favoritos">
+            <div class="cuadro">
+                <img src="../../../assets/images/Logos/carrito.jpg" class="foto-c  foto">
+            </div>
+        </ion-router>
+    </div>
+    <!--Separación-->
+    <div class="sep"></div>
+    <!--Carrito-->
+    <div>
+        <a routerLink="/favoritos">
+            <div class="cuadro">
+                <img src="../../../assets/images/Logos/fav0.png" class="foto-c  foto">
+            </div>
+        </a>
+    </div>
+</div>

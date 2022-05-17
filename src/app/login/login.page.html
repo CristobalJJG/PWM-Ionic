@@ -1,0 +1,96 @@
+<ion-content>
+<!--Fondo y backgroun-->
+<div class="recuadro">
+  <div>
+    <p class="advice"> Se han borrado la mayoría de las cuentas, intenta loggearte, si no puedes, regístrate</p>
+  </div>
+  <div>
+      <!--cabecera Inicio sesion-->
+      <div class="recuadro-login w100">
+          <div>
+              <ion-title> INICIA SESIÓN </ion-title>
+          </div>
+          <div class="cent">
+              <!--<form action="LogIn">-->
+              <form #forma1="ngForm">
+                  <div>
+                      <ion-input type="email" class="txtsin" id="LoginEmail" 
+                          placeholder="Dirección de e-mail" required
+                          #email = "ngModel" [(ngModel)] = "userLogIn.correo" name="email"
+                      ></ion-input>
+                  </div>
+                  <div>
+                      <ion-input type="password" class="txtsin" id="LoginPass" 
+                      placeholder="Contraseña" required
+                          #password="ngModel" [(ngModel)]="userLogIn.password" name="password"
+                      ></ion-input>
+                  </div>
+                  <!--Botón para acceder-->
+                  <div>
+                      <ion-input type="submit" id="btnLogin" (click)="login();" value="Iniciar Sesión" [disabled]="forma1.invalid"></ion-input>
+                  </div>
+              </form>
+          </div>
+      </div>
+
+      <!--Cuadro registrarse-->
+      <div class="recuadro-signin w100">
+          <!--cabecera Registro-->
+          <div>
+              <ion-title>REGISTRARSE</ion-title>
+          </div>
+          <form #forma2="ngForm">
+              <div>
+                  <ion-input type="email" class="txtsin" id="signInEmail" placeholder="Dirección de e-mail" required
+                      email #correo = "ngModel" [(ngModel)] = "userRegister.correo" name="email"
+                  ></ion-input>
+                  <div class="invalid-feedback" *ngIf="correo.invalid && correo.dirty">
+                      <div *ngIf="correo.errors?.['required']">
+                          El correo electrónico es obligatorio.
+                      </div> 
+                  </div>
+                  <div class="invalid-feedback" *ngIf="correo.invalid && correo.dirty">
+                      <div *ngIf="correo.errors?.['email']">
+                          No tiene formato de correo electrónico. 
+                      </div> 
+                  </div>
+              </div>
+              
+              <div>
+                  <ion-input type="text" class="txtsin" id="nombre" placeholder="Nombre" required
+                      #nombre = "ngModel" [(ngModel)] = "userRegister.nombre" name="nombre" 
+                      pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+" 
+                  ></ion-input>
+                  <div class="invalid-feedback" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                      <div *ngIf="nombre.errors?.['required']">
+                          El nombre de usuario es obligatorio.
+                      </div> 
+              
+                      <div *ngIf="nombre.errors?.['pattern']">
+                          No es un nombre válido.
+                      </div> 
+                  </div>
+              </div>
+              
+              <div>
+                  <ion-input type="password" class="txtsin" id="signInPass" placeholder="Contraseña" required
+                      #passwordR = "ngModel" [(ngModel)] = "userRegister.password" name="password" pattern="[ A-Za-z0-9_ ]{6,}"
+                  ></ion-input>
+                  <div class="invalid-feedback" *ngIf="passwordR.invalid && passwordR.dirty">
+                      <div *ngIf="passwordR.errors?.['required']">
+                          El nombre de usuario es obligatorio.
+                      </div>
+                      <div *ngIf="passwordR.errors?.['pattern']">
+                          La contraseña solo puede tener letras y números. Como mínimo 6 caracteres.
+                      </div>
+                  </div>
+              </div>
+              <!--Botón para acceder-->
+              <div class="cent">
+                  <ion-input type="submit" (click)="register();" id="btnRegister" value="Enviar" [disabled]="forma2.invalid"></ion-input>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+</ion-content>

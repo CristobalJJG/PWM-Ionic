@@ -1,0 +1,103 @@
+body {
+    background-color: #62c4be;
+}
+
+p.advice{
+    color: --ion-color-danger-rgb;
+}
+
+.recuadro {
+    display: grid;
+    position: absolute;
+    top: 15%;
+    margin-left: 30%;
+    height: auto;
+    width: 40%;
+    background-color: #eee;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.recuadro-login,
+.recuadro-signin {
+    position: relative;
+    text-align: center;
+    transition: all 0.4s;
+}
+
+.recuadro-signin {
+    margin: 40px 0px;
+}
+
+ion-title {
+    color: #FFF;
+    background: #222;
+    padding: 20px;
+    margin-top: 0px;
+    border-radius: 5px;
+}
+
+.txtsin {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+::placeholder {
+    color: #777
+}
+
+
+.w100 {
+    width: 100%;
+}
+
+.cent {
+    text-align: center;
+}
+
+ion-input[type="text"],
+ion-input[type="submit"],
+ion-input[type="password"],
+ion-input[type="email"]{
+    text-align: center;
+    width: 40%;
+    border-radius: 5px;
+    font-size: large;
+    background-color: #eee;
+    border: 1px solid #555;
+    left: 30%;
+}
+
+ion-input[type="submit"]:hover{
+    background-color: #999;
+}
+
+.invalid-feedback{
+    color:#222;
+    background-color: rgb(211, 78, 78);
+    box-shadow: 0px 5px 5px rgb(211, 78, 78);
+    border-radius: 5px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.invalid-feedback div{
+    font-size: small;
+}
+
+@media screen and (max-width:1300px) {
+    .recuadro {
+        margin-left: 20%;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .recuadro {
+        margin-left: 15%;
+        width: 70%;
+    }
+}

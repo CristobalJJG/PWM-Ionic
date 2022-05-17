@@ -1,0 +1,17 @@
+<ion-header>
+    <app-header></app-header>
+</ion-header>
+<ion-content>
+  <div class="padre" id="productos">
+    <div *ngFor="let producto of productos" class="imagen">
+            <ion-a [routerLink]="['/objeto', producto.id]">
+                <img [src]="producto.mainPhoto" id='producto.id'/>
+                <div class="content">
+                    <h2>{{producto.nombre}}</h2>
+                    <p id="precio">{{producto.precio}}€</p>
+                    <p>{{producto.descripcion}}</p>
+                </div>
+            </ion-a>
+    </div>
+</div>
+</ion-content>

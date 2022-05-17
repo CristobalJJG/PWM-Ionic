@@ -1,0 +1,113 @@
+    /* background */
+   
+    .cab-fondo {
+        background-color: #b6b6b6;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        justify-self: center;
+    }
+    
+    .sep {
+        position: relative;
+        float: right;
+        right: 15px;
+        border: 1px solid #2222;
+        background-color: #2222;
+        height: 1px;
+        top: 5px;
+        height: 75%;
+    }
+    /* Nombre de la pagina */
+    
+    .nombre {
+        font-size: 25px;
+        position: relative;
+        width: 200px;
+        height: 100%;
+        background-color: #D0D0D0;
+        padding-top: 10px;
+        float: left;
+        text-decoration: none;
+    }
+    
+    .nombre p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    img.foto {
+        width: 40px;
+        height: 40px;
+    }
+    /* Parte del carrito */
+    
+    .c-nombre {
+        position: relative;
+        padding: 0;
+        margin: 7px 0 0 0px;
+        right: 5px;
+        float: right;
+        transition: 200ms;
+        cursor: pointer;
+    }
+    
+    .foto-c {
+        position: relative;
+        margin-right: 35px;
+        margin-top: 3px;
+        float: right;
+        cursor: pointer;
+    }
+    /* Parte del Usuario */
+    
+    .userName {
+        position: relative;
+        margin: 7px 0 0 0px;
+        font-size: 20px;
+        right: 5px;
+        float: right;
+        cursor: pointer;
+    }
+    
+    #foto-u {
+        position: relative;
+        margin-top: 3px;
+        margin-right: 20px;
+        float: right;
+        cursor: pointer;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 1px solid #222;
+    }
+    
+    a,
+    a:visited {
+        font-style: unset;
+        color: #222;
+}
+
+@media screen and (max-width:960px) {
+    .cab-fondo{
+        height: 70px;
+    }
+    .sep{
+        top: 15px;
+    }
+    img.foto,
+    img#foto-u {
+        margin-top: 10px;
+        width: 50px;
+        height: 50px;
+    }
+    .userName {
+        font-size: 25px;
+    }
+    .nombre {
+        width: 150px;
+    }
+    .nombre p {
+        margin: 0;
+        padding-top: 10px;
+    }
+}
