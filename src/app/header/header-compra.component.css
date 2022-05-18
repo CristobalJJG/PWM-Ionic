@@ -92,7 +92,7 @@
         height: 70px;
     }
     .sep{
-        top: 15px;
+        top: 10px;
     }
     img.foto,
     img#foto-u {
@@ -101,6 +101,7 @@
         height: 50px;
     }
     .userName {
+        margin-top: 25px;
         font-size: 25px;
     }
     .nombre {

@@ -17,13 +17,13 @@ export class FirestoreService {
     private auth:AuthService,
     /* public json:JSONService */) { }
 
-  async getAllProducts(){
-    return await new Promise<any>((resolve) => {
-      this.db.collection('Objetos')
-      .valueChanges({ idField: 'id' })
-      .subscribe(products => resolve(products));
-    })
-  }
+    async getAllProducts(){
+      return new Promise<any>((resolve) => {
+        this.db.collection('Objetos')
+        .valueChanges({ idField: 'id' })
+        .subscribe(users => resolve(users));
+      })
+    }
 
   /* addJSONToFirebase(){
     this.json.getJSONProducts().subscribe((data) => { 

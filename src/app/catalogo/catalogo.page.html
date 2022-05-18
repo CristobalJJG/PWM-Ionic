@@ -1,20 +1,20 @@
 <ion-header>
     <app-header></app-header>
 </ion-header>
-<ion-content>
-  <div class="padre" id="productos">
+<div class="padre" id="productos">
+    <p style="display: none;">{{productos[0].nombre}}</p>
     <div *ngFor="let producto of productos" class="imagen">
-            <a routerLink="'/objeto' + producto.id">
-                <img [src]="producto.mainPhoto"/>
-                <div class="content">
-                    <h2>{{producto.nombre}}</h2>
-                    <p id="precio">{{producto.precio}}€</p>
-                    <p>{{producto.descripcion}}</p>
-                </div>
-            </a>
+        <a (click)="goToObject(producto?.id);">
+            <img [src]="producto?.mainPhoto" id='producto?.id'/>
+            <div class="content">
+                <h2>{{producto?.nombre}}</h2>
+                <p id="precio">{{producto?.precio}}€</p>
+                <p>{{producto?.descripcion}}</p>
+            </div>
+        </a>
     </div>
 </div>
-</ion-content>
+
 <ion-footer>
     <app-footer></app-footer>
 </ion-footer>

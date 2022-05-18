@@ -4,16 +4,16 @@
   <div class="med">
       <!--Div imagen-->
       <div>
-          <img id="mainPhoto" class="img" [src]="objeto.mainPhoto"/>
+          <img id="mainPhoto" class="img" [src]="objeto?.mainPhoto"/>
       </div>
         
       <!--Div información-->
       <div class="recuadro">
           <!--Info-->
           <div>
-              <div><h2 id="objName">{{objeto.nombre}}</h2></div>
-              <div><h3 id="precio">{{objeto.precio}}€</h3></div>
-              <div><p  id="empresa">{{objeto.empresa}}</p></div>
+              <div><h2 id="objName">{{objeto?.nombre}}</h2></div>
+              <div><h3 id="precio">{{objeto?.precio}}€</h3></div>
+              <div><p  id="empresa">{{objeto?.empresa}}</p></div>
           </div>
           
           <div>

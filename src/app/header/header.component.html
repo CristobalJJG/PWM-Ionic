@@ -11,8 +11,8 @@
             </div>
             <div>
                 <div>
-                    <p *ngIf="auth_.user==undefined" id="nombre" class="userName">Iniciar Sesión</p>
-                    <p id="nombreUser" class="userName">{{auth_.user.nombre}}</p>
+                    <p *ngIf="auth_?.user==undefined" id="nombre" class="userName">Iniciar Sesión</p>
+                    <p id="nombreUser" class="userName">{{auth_?.user?.nombre}}</p>
                 </div>
             </div>
         </a>
@@ -20,7 +20,7 @@
     <div class="sep"></div>
     <!--Favoritos-->
     <div>
-        <a routerLink="/cesta">
+        <a href="/cesta">
             <div class="cuadro">
                 <img src="../../../assets/images/Logos/carrito.jpg" class="foto-c  foto">
             </div>
@@ -30,7 +30,7 @@
     <div class="sep"></div>
     <!--Carrito-->
     <div>
-        <a routerLink="/favoritos">
+        <a href="/favoritos">
             <div class="cuadro">
                 <img src="../../../assets/images/Logos/fav0.png" class="foto-c  foto">
             </div>
