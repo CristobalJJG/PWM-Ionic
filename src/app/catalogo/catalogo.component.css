@@ -10,11 +10,12 @@ body {
 .padre {
     display: flex;
     flex-wrap: wrap;
-    height: 100% + 70px;
+    height: 80% + 70px;
     justify-content: center;
     margin: 1% 10%;
     padding: 1%;
     box-shadow: 2px 2px 5px #22222275;
+    overflow-y: auto;
 }
 
 .imagen {

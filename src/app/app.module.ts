@@ -11,6 +11,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { ReusableModule } from './reusable/reusable.module';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/services/auth.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -19,12 +21,14 @@ import { ReusableModule } from './reusable/reusable.module';
     IonicModule.forRoot(), 
     AppRoutingModule,
     FormsModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     ReusableModule
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  
+    AuthService
     ],
   bootstrap: [AppComponent],
 })

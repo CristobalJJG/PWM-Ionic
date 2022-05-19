@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/services/auth.service';
@@ -8,30 +8,29 @@ import { AuthService } from 'src/services/auth.service';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.css'],
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage {
 
   userName:any = "";
   showChange = false;
 
-  constructor(private auth:AuthService,
+  constructor(public auth:AuthService,
     private storage: AngularFireStorage) { 
-    this.userName = this.auth.user.nombre;
-    try{
-      this.getUserImg(this.userName);
-    }catch(err){
-      console.error("No se encontró foto para este perfil");
+    console.log(auth.user);
+    
+    this.userName = this.auth.user?.nombre;
+    if(this.auth.user === undefined){
+      this.storage.ref("Profile_images/Usuario.png")
+        .getDownloadURL().subscribe((data) => this.userImg = data);
+    }else{
+      this.storage.ref("Profile_images/" + this.auth.user.nombre)
+        .getDownloadURL().subscribe((data) => this.userImg = data);
     }
   }
-
-  ngOnInit(): void {
-    
-  }
-
 
   userImg:Observable<string> | undefined;
   async onUpload(e:any){
     const filePath = 'Profile_images/' + this.userName;
-    const task = this.storage.upload(filePath, e.target.files[0]);
+    this.storage.upload(filePath, e.target.files[0]);
     this.getUserImg(this.userName);
     this.showChange = true;
   }
@@ -44,5 +43,9 @@ export class PerfilPage implements OnInit {
       this.storage.ref("Profile_images/Usuario.png")
       .getDownloadURL().subscribe((data) => this.userImg = data);
     }
+  }
+
+  changeName(name:string){
+    alert("Name changed from " + this.auth.user?.nombre + " to " + name);
   }
 }

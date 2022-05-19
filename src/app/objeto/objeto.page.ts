@@ -14,9 +14,7 @@ export class ObjetoPage implements OnInit {
     private dbService:FirestoreService){}
   objeto:any;
 
-  ngOnInit(): void {
-      console.log("se pidió venir");
-      
+  ngOnInit(): void {      
     const id = this.route.snapshot.params['id'];
 
     const productos = this.dbService.getAllProducts();

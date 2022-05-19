@@ -1,31 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <app-header></app-header>
   <div class="f-gris">
       <!--Imagen del usuario-->
       <div class="pict flex">
           <img src="{{userImg}}" id="userPicture" width="200" height="200" />
-          
-          <div>
-              <input type="submit" routerLink="" value="Compras realizadas">
-          </div>
           <form>
-              <div class="flex">
-                  <label for="chPicture">Cambiar la foto de perfil</label>
-                  <input type="file" (change)="onUpload($event)" accept="image/*" id="chPicture"/>
-              </div>
-              <div *ngIf="showChange">
-                  Recargue la página para ver los cambios
-              </div>
-          </form>
+            <div class="flex">
+                <label for="chPicture">Cambiar la foto de perfil</label>
+                <ion-button type="file" (change)="onUpload($event)" accept="image/*" id="chPicture">Cambiar Foto</ion-button> 
+            </div>
+            <div *ngIf="showChange">
+                Recargue la página para ver los cambios
+            </div>
+        </form>
           <div>
-              <input type="submit" 
-              routerLink="/catalogo" value="Catálogo">
+              <ion-button type="submit" routerLink="">Compras realizadas</ion-button> 
           </div>
       </div>
       <!--Fondo de los datos-->
@@ -33,10 +22,13 @@
           <!--zona de los datos-->
           <div class="datos">
               <div>
-                  <p id="userName">{{userName}}</p>
+                  <ion-input id="userName" #username="ngModel" 
+                    [(ngModel)]="userName" name="userName" 
+                    placeholder="{{auth.user?.nombre}}">{{auth.user?.nombre}}</ion-input>
+                  <ion-button (click)="changeName(userName);">Cambiar nombre</ion-button>
               </div>
           </div>
       </div>
   </div>
-  <!-- <app-footer style="position: fixed;"></app-footer> -->
+  <app-footer></app-footer>
 </ion-content>

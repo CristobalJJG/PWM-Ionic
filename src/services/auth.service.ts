@@ -1,73 +1,80 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import { getDatabase, ref, onValue} from "firebase/database";
 import { User } from 'src/interfaces/user';
-import { FirestoreService } from './firestore.service';
+import { Auth } from 'firebase/auth';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private _user: User = undefined;
   public isLogged:any = false;
+  private _user: User = undefined;
 
-  constructor(private auth: AngularFireAuth,
-    private db: AngularFirestore,){
-    auth.authState.subscribe( user => (this.isLogged = user));
-  }
+  constructor(private afAuth: AngularFireAuth,
+    private db: AngularFirestore,){ }
 
-  async SignIn(user:User){
+  async login(user_: User){
     try{
-      const auth_ = getAuth()
-      setPersistence(auth_, browserSessionPersistence)
-      .then(() => {
-        this._user=user;
-        localStorage.setItem(this._user.correo, this._user.password);
-        return signInWithEmailAndPassword(auth_,
-        user.correo.toString().toLowerCase().trim(), 
-        user.password
-      );
-      })
-      
-    } catch (err){
-      console.error('Error on login: ', err);
-      return null;
+      return await this.afAuth.signInWithEmailAndPassword(user_.correo, user_.password);
+    }catch(error){
+      console.error(error);
     }
   }
 
-  async RegisterNewUser(user:User){
+  async logout(){
     try{
-      this._user = user;
-      this.addNewUser(user);
-      return await this.auth.createUserWithEmailAndPassword(
-        user.correo.toString().toLowerCase().trim(), 
-        user.password
-      );
-    } catch (err){
-      console.error('Error on register: ', err);
-      return null;
+      await this.afAuth.signOut();
+    }catch(error){
+      console.error(error);
     }
   }
 
-  addNewUser(user:User){
-    this.db.collection("Usuarios")
-      .doc(user.correo)
-      .set({
-        nombre:user.nombre,
-        favoritos: user.favorito,
-        cesta: user.cesta
-      });
+  async register(user_: User){
+    try{
+      const res = await this.afAuth.createUserWithEmailAndPassword(user_.correo, user_.password);
+      this.user = user_;
+      if(res != null){
+        this.addNewUserToDB(user_);
+      }
+      return res;
+    }catch(error){
+      console.error(error);
+    }
+  }
+
+  getCurrentUser(){
+    return this.afAuth.authState.pipe(first()).toPromise();
+  }
+
+  set user(user:User){
+    this._user = user;
   }
 
   get user(): User {
-    if(this._user == undefined){
-      return undefined;
-    }
-    return this._user;
+    const res = this.getCurrentUser();
+    res.then((data) => {
+      const db = getDatabase();
+      const starCountRef = ref(db, 'Usuarios' + data.email.split('@')[0]);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        return data
+      });
+    });
+    return undefined;
   }
- 
+
+  addNewUserToDB(user_:User){
+    this.db.collection("Usuarios")
+      .doc(user_.correo.split("@")[0])
+      .set({
+        nombre:user_.nombre,
+        favoritos: user_.favorito,
+        cesta: user_.cesta
+      });
+  } 
 }

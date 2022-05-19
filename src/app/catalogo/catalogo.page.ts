@@ -10,19 +10,19 @@ import { FirestoreService } from 'src/services/firestore.service';
 })
 export class CatalogoPage implements OnInit{
 
-  productos:NewProduct[] = [];
+  productos:NewProduct[];
 
   constructor(private dbService:FirestoreService,
     private router:Router, private route: ActivatedRoute){
     //dbService.addJSONToFirebase();
-    
-  }
-  ngOnInit(): void {
     this.dbService.getAllProducts()
     .then(data => {
       this.productos = data
       console.log(this.productos)
     }); 
+  }
+  ngOnInit(): void {
+    
   }
 
   goToObject(id:string){

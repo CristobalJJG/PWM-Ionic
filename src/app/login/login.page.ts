@@ -7,6 +7,7 @@ import { AuthService } from 'src/services/auth.service';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login-signup.component.css'],
+  providers: [AuthService],
 })
 export class LoginPage{
 
@@ -34,23 +35,29 @@ export class LoginPage{
     private route: Router) {}
 
   async register(){
-    const x = await this.auth.RegisterNewUser(this.userRegister);
-    if(x != null){
+    await this.auth.register(this.userRegister);
+    if(this.auth.user != undefined){
       console.log("Usuario " + this.userRegister.correo + " creado exitosamente");
-      this.route.navigateByUrl('/catalogo');
+      this.route.navigate(['/catalogo']);
     }else{
       console.log("No se pudo crear el usuario")
     }
+    alert(this.userLogIn);
   }
 
   async login() {
-    const x = await this.auth.SignIn(this.userLogIn);
-    if(x != null){
-      console.log("Usuario " + this.userLogIn.correo + " logeado exitosamente");
-      this.route.navigateByUrl('/catalogo');
-    }else{
-      console.log("No se pudo loggear el usuario")
+    try{
+      await this.auth.login(this.userLogIn);
+      if(this.auth.user != undefined){
+        console.log("Usuario " + this.userLogIn.correo + " logeado exitosamente");
+        this.route.navigate(['/catalogo']);
+      }else{
+        console.log("No se pudo loggear el usuario")
+      }
+    }catch(err){
+      console.error(err);
     }
+    alert(this.userLogIn.correo);
   }
 
 }

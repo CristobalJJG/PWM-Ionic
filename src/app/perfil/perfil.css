@@ -4,6 +4,12 @@ body {
     background: #222;
 }
 
+app-footer{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+} 
+
 div.flex{
     display: flex;
     flex-direction: column;
