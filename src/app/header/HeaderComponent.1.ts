@@ -22,15 +22,12 @@ export class HeaderComponent implements OnInit{
   constructor(public auth_: AuthService,
     private storage: AngularFireStorage,
     private router:Router) {
-    this.getUserImg();
-    if(this.loggedMail != ""){
-      
-    }
   }
   
   async ngOnInit(){
     this.loggedMail = (await this.auth_.getCurrentUser()).email;
     this.user = this.auth_.getUserInfo(this.loggedMail);
+    this.getUserImg();
   }
 
   changeRoute(){
@@ -44,10 +41,10 @@ export class HeaderComponent implements OnInit{
 
   async getUserImg() {
     try{
-      await this.storage.ref("Profile_images/" + this.user.id.split("@")[0])
+      await this.storage.ref("Profile_images/" + this.auth_.user?.id)
         .getDownloadURL().subscribe((data) => this.userImg = data);
     }catch(err){
-      console.error("Profile","No se encontró foto para este usuario.");
+      console.error("Profile: ",err);
     }
   }
 }

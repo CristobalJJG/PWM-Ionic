@@ -25,6 +25,6 @@ export class CatalogoPage implements OnInit{
   }
 
   goToObject(id:string){
-    this.router.navigate(["objeto", id], {relativeTo: this.route});
+    this.router.navigate(["objeto", id]);
   }
 }

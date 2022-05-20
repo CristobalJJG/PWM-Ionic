@@ -30,7 +30,7 @@ export class PerfilPage implements OnInit{
 
   userImg:Observable<string> | undefined;
   async onUpload(e:any){
-    const filePath = 'Profile_images/' + this.auth.user?.id.split("@")[0];
+    const filePath = 'Profile_images/' + this.auth.user?.id;
     this.storage.upload(filePath, e.target.files[0]);
     this.getUserImg();
     this.showChange = true;
@@ -38,10 +38,10 @@ export class PerfilPage implements OnInit{
 
   async getUserImg(){    
     try{
-      await this.storage.ref("Profile_images/" + this.user.id.split("@")[0])
+      await this.storage.ref("Profile_images/" + this.auth.user?.id)
         .getDownloadURL().subscribe((data) => this.userImg = data);
     }catch(err){
-      console.error("Profile: ","No se encontró foto para este usuario.");
+      console.error("Profile: ",err);
     }
   }
 
@@ -52,6 +52,6 @@ export class PerfilPage implements OnInit{
 
   logOut(){
     this.auth.logout();
-    this.router.navigate([]);
+    this.router.navigate(["/catalogo"]);
   }
 }

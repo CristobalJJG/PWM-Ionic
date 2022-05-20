@@ -4,7 +4,8 @@
 <div class="padre" id="productos">
     <p *ngIf="productos!=undefined" style="display: none;">{{productos[0]?.nombre}}</p>
     <div *ngFor="let producto of productos" class="imagen">
-        <a href="/objeto/{{producto.id}}">
+        <a (click)="goToObject(producto.id)">
+        <!-- <a href="/objeto/{{producto.id}}"> -->
             <img [src]="producto?.mainPhoto" id='producto?.id'/>
             <div class="content">
                 <h2>{{producto?.nombre}}</h2>
