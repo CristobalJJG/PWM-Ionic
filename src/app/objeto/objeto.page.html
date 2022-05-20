@@ -31,11 +31,11 @@
           
               <!--Añadir al carrito con las opciones seleccionadas-->
               <div class="flex">
-                    <ion-button id="addCarrito" onclick="addCarrito">
+                    <ion-button id="addCarrito" (click)="addCarrito();">
                         Añadir al carrito
                     </ion-button>
                     <br/><br/>
-                    <button id="addFavourite" onclick="addFavourite">
+                    <button id="addFavourite" (click)="addFavorito();">
                         <p class="fav"><3</p>
                     </button>
               </div>

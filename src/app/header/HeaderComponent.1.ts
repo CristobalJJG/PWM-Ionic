@@ -13,7 +13,7 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class HeaderComponent implements OnInit{
 
-  userImg: Observable<string> | undefined | string;
+  userImg: Observable<string> | undefined;
   public ruta = "/login";
   public nombre:string = "";
   public user:UserMinInfo = undefined;
@@ -44,15 +44,10 @@ export class HeaderComponent implements OnInit{
 
   async getUserImg() {
     try{
-      if(this.user === undefined){
-        await this.storage.ref("Profile_images/Usuario.png")
-          .getDownloadURL().subscribe((data) => this.userImg = data);
-      }else{
-          await this.storage.ref("Profile_images/" + this.user.id.split("@")[0])
-            .getDownloadURL().subscribe((data) => this.userImg = data);
-      }
+      await this.storage.ref("Profile_images/" + this.user.id.split("@")[0])
+        .getDownloadURL().subscribe((data) => this.userImg = data);
     }catch(err){
-      this.userImg = "/src/assets/images/Logos/Usuario.png"
+      console.error("Profile","No se encontró foto para este usuario.");
     }
   }
 }

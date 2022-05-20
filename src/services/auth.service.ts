@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
-import { getDatabase, ref, onValue} from "firebase/database";
+import { getDatabase, ref, onValue, set} from "firebase/database";
 import { User } from 'src/interfaces/user';
 import { Auth } from 'firebase/auth';
 import { first } from 'rxjs/operators';
 import { UserMinInfo } from 'src/interfaces/UserMinInfo';
+import { FirestoreService } from './firestore.service';
+import { NewProduct } from 'src/interfaces/newProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class AuthService {
   private _user: UserMinInfo = undefined;
 
   constructor(private afAuth: AngularFireAuth,
-    private db: AngularFirestore,){ }
+    private dbfr: AngularFirestore,
+    private db: FirestoreService){ }
 
   async login(user_: User){
     try{
@@ -55,7 +58,7 @@ export class AuthService {
 
   getUserInfo(mail:string):UserMinInfo{
     let prom = new Promise<any>((resolve) => {
-      this.db.collection('Usuarios')
+      this.dbfr.collection('Usuarios')
       .valueChanges({ idField: 'id' })
       .subscribe(users => resolve(users));
     });
@@ -80,7 +83,7 @@ export class AuthService {
   }
 
   addNewUserToDB(user_:User){
-    this.db.collection("Usuarios")
+    this.dbfr.collection("Usuarios")
       .doc(user_.correo.split("@")[0])
       .set({
         nombre:user_.nombre,
@@ -88,4 +91,43 @@ export class AuthService {
         cesta: user_.cesta
       });
   } 
+
+  commitChange(){
+    this.dbfr.collection("Usuarios")
+      .doc(this.user.id)
+      .set({
+        nombre: this.user.nombre,
+        favoritos: this.user.favoritos,
+        cesta: this.user.cesta
+      });
+  }
+
+  updateName(name:string){
+    this.user.nombre=name;
+    this.commitChange();
+  }
+
+  pushItemToFavourite(id:string){
+    console.log(this.user)
+    this.db.getAllProducts().then((data:NewProduct[]) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].id == id){
+          this.user.favoritos.push(data[i]);
+        }
+      }
+    })
+    this.commitChange();
+  }
+
+  pushItemToCesta(id:string){
+    console.log(this.user)
+    this.db.getAllProducts().then((data:NewProduct[]) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].id == id){
+          this.user.cesta.push(data[i]);
+        }
+      }
+    })
+    this.commitChange();
+  }
 }

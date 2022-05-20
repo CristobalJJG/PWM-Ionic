@@ -60,6 +60,5 @@ export class LoginPage{
     }else{
       console.log("No se pudo crear el usuario")
     }
-    alert(this.userLogIn);
   }
 }

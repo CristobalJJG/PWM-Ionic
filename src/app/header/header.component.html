@@ -7,7 +7,8 @@
     <div>
         <a (click)="changeRoute();">
             <div class="cuadro">
-                <img src="{{userImg}}" id="foto-u" class="foto">
+                <img *ngIf="userImg == undefined" src="../../assets/images/Logos/Usuario.png" id="foto-u" class="foto">                
+                <img *ngIf="userImg != undefined" src="{{userImg}}" id="foto-u" class="foto">
             </div>
             <div>
                 <div>

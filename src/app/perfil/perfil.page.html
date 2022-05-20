@@ -3,11 +3,14 @@
   <div class="f-gris">
       <!--Imagen del usuario-->
       <div class="pict flex">
-          <img src="{{userImg}}" id="userPicture" width="200" height="200" />
+          <img *ngIf="userImg == undefined" src="../../assets/images/Logos/Usuario.png" id="userPicture" width="200" height="200">
+          <img *ngIf="userImg != undefined" src="{{userImg}}" id="userPicture" width="200" height="200" />
           <form>
             <div class="flex">
                 <label for="chPicture">Cambiar la foto de perfil</label>
-                <ion-button type="file" (change)="onUpload($event)" accept="image/*" id="chPicture">Cambiar Foto</ion-button> 
+                <!-- <ion-button> -->
+                    <ion-input type="file" (change)="onUpload($event)" accept="image/*" id="chPicture" value="Cambiar Foto"></ion-input> 
+               <!--  </ion-button> -->
             </div>
             <div *ngIf="showChange">
                 Recargue la página para ver los cambios
@@ -22,6 +25,7 @@
           <!--zona de los datos-->
           <div class="datos">
               <div>
+                  <ion-label for="userName"> Tu nombre:</ion-label>
                   <ion-input id="userName" #username="ngModel" 
                     [(ngModel)]="userName" name="userName" 
                     placeholder="{{auth.user?.nombre}}"></ion-input>
