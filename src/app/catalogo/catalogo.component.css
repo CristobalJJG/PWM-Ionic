@@ -86,8 +86,8 @@ h2 {
 
 @media screen and (max-width:960px) {
     .imagen {
-        width: 150px;
-        height: 200px;
+        width: 188px;
+        height: 250px;
     }
     h2,
     p.precio,
@@ -96,10 +96,10 @@ h2 {
     }
 }
 
-@media screen and (min-width:300px) and (max-width:700px) {
+@media screen and (min-width:300px) and (max-width:600px) {
     .imagen {
-        width: 120px;
-        height: 160px;
+        width: 240px;
+        height: 320px;
     }
     
     h2,

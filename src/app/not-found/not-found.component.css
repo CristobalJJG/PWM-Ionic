@@ -123,3 +123,14 @@ div p{
 		padding: 25px 0px;
 	}
 }
+
+@media screen and (max-width:500px) {
+	.error-container {
+		font-size: x-large;
+		font-size: 120px;
+		top:20%
+	}
+	div{
+		margin-top: 80px;
+	}
+}

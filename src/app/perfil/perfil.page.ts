@@ -23,7 +23,7 @@ export class PerfilPage implements OnInit{
 
   async ngOnInit() {
     this.loggedMail = (await this.auth.getCurrentUser()).email;
-    this.user = this.auth.getUserInfo(this.loggedMail);
+    this.auth.getUserInfo(this.loggedMail);
   }
 
   userImg:Observable<string> | undefined | string;
@@ -49,6 +49,6 @@ export class PerfilPage implements OnInit{
   }
 
   changeName(name:string){
-    alert("Name changed from " + this.user?.nombre + " to " + name);
+    alert("Name changed from " + this.auth.user?.nombre + " to " + name);
   }
 }

@@ -11,7 +11,7 @@
     .sep {
         position: relative;
         float: right;
-        right: 15px;
+        right: 10px;
         border: 1px solid #2222;
         background-color: #2222;
         height: 1px;
@@ -54,7 +54,7 @@
     
     .foto-c {
         position: relative;
-        margin-right: 35px;
+        margin-right: 25px;
         margin-top: 3px;
         float: right;
         cursor: pointer;
@@ -64,16 +64,21 @@
     .userName {
         position: relative;
         margin: 12px 0 0 0px;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 20px;
         right: 5px;
         float: right;
         cursor: pointer;
+        transition: all 0.4s ;
     }
     
     #foto-u {
         position: relative;
         margin-top: 3px;
-        margin-right: 20px;
+        margin-right: 5px;
         float: right;
         cursor: pointer;
         object-fit: cover;
@@ -110,5 +115,25 @@
     .nombre p {
         margin: 0;
         padding-top: 10px;
+    }
+}
+
+@media screen and (max-width:600px){
+    p.userName {
+        max-width: 150px;
+        margin-top: 25px;
+        font-size: 20px;
+    }
+    .nombre {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width:500px){
+    p.userName{
+        max-width: 80px;
+    }
+    .nombre {
+        width: 100px;
     }
 }
