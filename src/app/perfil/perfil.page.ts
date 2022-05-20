@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
+import { User } from 'src/interfaces/user';
+import { UserMinInfo } from 'src/interfaces/UserMinInfo';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({
@@ -8,44 +10,45 @@ import { AuthService } from 'src/services/auth.service';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.css'],
 })
-export class PerfilPage {
-
-  userName:any = "";
+export class PerfilPage implements OnInit{
+  loggedMail:string = "";
+  userName="";
   showChange = false;
+  user:UserMinInfo = undefined;
 
   constructor(public auth:AuthService,
     private storage: AngularFireStorage) { 
-    console.log(auth.user);
     
-    this.userName = this.auth.user?.nombre;
-    if(this.auth.user === undefined){
-      this.storage.ref("Profile_images/Usuario.png")
-        .getDownloadURL().subscribe((data) => this.userImg = data);
-    }else{
-      this.storage.ref("Profile_images/" + this.auth.user.nombre)
-        .getDownloadURL().subscribe((data) => this.userImg = data);
-    }
   }
 
-  userImg:Observable<string> | undefined;
+  async ngOnInit() {
+    this.loggedMail = (await this.auth.getCurrentUser()).email;
+    this.user = this.auth.getUserInfo(this.loggedMail);
+  }
+
+  userImg:Observable<string> | undefined | string;
   async onUpload(e:any){
-    const filePath = 'Profile_images/' + this.userName;
+    const filePath = 'Profile_images/' + this.user.id;
     this.storage.upload(filePath, e.target.files[0]);
-    this.getUserImg(this.userName);
+    this.getUserImg(this.user.id);
     this.showChange = true;
   }
 
   async getUserImg(userName: string){    
     try{
-      this.storage.ref("Profile_images/" + userName)
-      .getDownloadURL().subscribe((data) => this.userImg = data);
+      if(this.loggedMail != ""){
+        await this.storage.ref("Profile_images/Usuario.png")
+          .getDownloadURL().subscribe((data) => this.userImg = data);
+      }else{
+        await this.storage.ref("Profile_images/" + userName)
+          .getDownloadURL().subscribe((data) => this.userImg = data);
+      }
     }catch(err){
-      this.storage.ref("Profile_images/Usuario.png")
-      .getDownloadURL().subscribe((data) => this.userImg = data);
+      this.userImg = "/src/assets/images/Logos/Usuario.png"
     }
   }
 
   changeName(name:string){
-    alert("Name changed from " + this.auth.user?.nombre + " to " + name);
+    alert("Name changed from " + this.user?.nombre + " to " + name);
   }
 }

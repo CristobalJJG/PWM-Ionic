@@ -3,17 +3,16 @@
     <a href="/catalogo" class="nombre">
         <p>Nano's</p>
     </a>
-    <div style="float: left;">Logged: </div>
     <!--Parte del usuario-->
     <div>
-        <a href="{{ruta}}">
+        <a (click)="changeRoute();">
             <div class="cuadro">
                 <img src="{{userImg}}" id="foto-u" class="foto">
             </div>
             <div>
                 <div>
-                    <p *ngIf="auth_?.user==undefined" id="nombre" class="userName">Iniciar Sesión</p>
-                    <p id="nombreUser" class="userName">{{auth_?.user?.nombre}}</p>
+                    <p *ngIf="loggedMail == ''" id="nombre" class="userName">Iniciar Sesión</p>
+                    <p id="nombreUser" class="userName">{{auth_.user?.nombre}}</p>
                 </div>
             </div>
         </a>

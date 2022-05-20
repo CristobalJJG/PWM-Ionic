@@ -18,7 +18,6 @@ export class CatalogoPage implements OnInit{
     this.dbService.getAllProducts()
     .then(data => {
       this.productos = data
-      console.log(this.productos)
     }); 
   }
   ngOnInit(): void {

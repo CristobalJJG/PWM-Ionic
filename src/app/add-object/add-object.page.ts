@@ -52,9 +52,7 @@ export class AddObjectPage implements OnInit {
   addObject(){
     this.product.id = this.extraData;
     this.img?.subscribe((data) => {
-      this.product.mainPhoto = data;
-      console.log(this.product);
-      
+      this.product.mainPhoto = data;      
       this.fire.addNewProduct(this.product)
     });
   }

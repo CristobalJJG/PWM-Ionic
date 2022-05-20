@@ -6,6 +6,7 @@ import { getDatabase, ref, onValue} from "firebase/database";
 import { User } from 'src/interfaces/user';
 import { Auth } from 'firebase/auth';
 import { first } from 'rxjs/operators';
+import { UserMinInfo } from 'src/interfaces/UserMinInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,14 @@ import { first } from 'rxjs/operators';
 
 export class AuthService {
   public isLogged:any = false;
-  private _user: User = undefined;
+  private _user: UserMinInfo = undefined;
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFirestore,){ }
 
   async login(user_: User){
     try{
+      this.getUserInfo(user_.correo);      
       return await this.afAuth.signInWithEmailAndPassword(user_.correo, user_.password);
     }catch(error){
       console.error(error);
@@ -36,8 +38,8 @@ export class AuthService {
 
   async register(user_: User){
     try{
+      this.getUserInfo(user_.correo);   
       const res = await this.afAuth.createUserWithEmailAndPassword(user_.correo, user_.password);
-      this.user = user_;
       if(res != null){
         this.addNewUserToDB(user_);
       }
@@ -51,21 +53,30 @@ export class AuthService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
 
-  set user(user:User){
+  getUserInfo(mail:string):UserMinInfo{
+    let prom = new Promise<any>((resolve) => {
+      this.db.collection('Usuarios')
+      .valueChanges({ idField: 'id' })
+      .subscribe(users => resolve(users));
+    });
+    let shortM = mail.split("@")[0]
+    prom.then((data:UserMinInfo[]) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].id === shortM){
+          this.user = data[i];
+          return data[i];
+        }
+      }
+    });
+    return null;
+  }
+
+  set user(user: UserMinInfo){
     this._user = user;
   }
 
-  get user(): User {
-    const res = this.getCurrentUser();
-    res.then((data) => {
-      const db = getDatabase();
-      const starCountRef = ref(db, 'Usuarios' + data.email.split('@')[0]);
-      onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        return data
-      });
-    });
-    return undefined;
+  get user(): UserMinInfo{
+    return this._user;
   }
 
   addNewUserToDB(user_:User){

@@ -25,7 +25,6 @@ export class ObjetoPage implements OnInit {
           break;
         }
       }
-      console.log(this.objeto)
     }) 
   }
 }

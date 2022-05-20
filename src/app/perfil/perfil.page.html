@@ -24,7 +24,7 @@
               <div>
                   <ion-input id="userName" #username="ngModel" 
                     [(ngModel)]="userName" name="userName" 
-                    placeholder="{{auth.user?.nombre}}">{{auth.user?.nombre}}</ion-input>
+                    placeholder="{{user?.nombre}}">{{user?.nombre}}</ion-input>
                   <ion-button (click)="changeName(userName);">Cambiar nombre</ion-button>
               </div>
           </div>

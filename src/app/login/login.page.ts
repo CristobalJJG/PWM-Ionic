@@ -34,21 +34,14 @@ export class LoginPage{
   constructor(public auth:AuthService,
     private route: Router) {}
 
-  async register(){
-    await this.auth.register(this.userRegister);
-    if(this.auth.user != undefined){
-      console.log("Usuario " + this.userRegister.correo + " creado exitosamente");
-      this.route.navigate(['/catalogo']);
-    }else{
-      console.log("No se pudo crear el usuario")
-    }
-    alert(this.userLogIn);
-  }
-
   async login() {
     try{
       await this.auth.login(this.userLogIn);
-      if(this.auth.user != undefined){
+      console.log("user", this.auth.user);
+      
+      console.log("currentUser", await this.auth.getCurrentUser());
+      if((this.auth.user !== undefined) && 
+          (await this.auth.getCurrentUser()).email != ""){
         console.log("Usuario " + this.userLogIn.correo + " logeado exitosamente");
         this.route.navigate(['/catalogo']);
       }else{
@@ -57,7 +50,16 @@ export class LoginPage{
     }catch(err){
       console.error(err);
     }
-    alert(this.userLogIn.correo);
   }
 
+  async register(){
+    await this.auth.register(this.userRegister);
+    if((await this.auth.getCurrentUser()).email != ""){
+      console.log("Usuario " + this.userRegister.correo + " creado exitosamente");
+      this.route.navigate(['/catalogo']);
+    }else{
+      console.log("No se pudo crear el usuario")
+    }
+    alert(this.userLogIn);
+  }
 }
