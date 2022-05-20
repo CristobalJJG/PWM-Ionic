@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>favoritos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <app-header></app-header>
 
+  <div>
+      <div class="cent">
+          <h1>Favoritos</h1>
+      </div>
+      <div class="padre">
+        <div *ngFor="let p of favs" class="imagen">
+          <a (click)="goToObject(p.id)">
+            <img [src]="p?.mainPhoto" id='producto?.id'/>
+            <div class="content">
+                <h2>{{p?.nombre}}</h2>
+                <p id="precio">{{p?.precio}}€</p>
+                <p>{{p?.descripcion}}</p>
+            </div>
+          </a>
+      </div>
+  
+      </div>
+  </div>
+  
+  <app-footer style="display:fixed; bottom:0;"></app-footer>
 </ion-content>

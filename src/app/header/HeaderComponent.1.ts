@@ -20,9 +20,7 @@ export class HeaderComponent implements OnInit{
   public loggedMail:string = ""
 
   constructor(public auth_: AuthService,
-    private storage: AngularFireStorage,
-    private router:Router) {
-  }
+    private router:Router) {}
   
   async ngOnInit(){
     this.loggedMail = (await this.auth_.getCurrentUser()).email;
@@ -31,8 +29,8 @@ export class HeaderComponent implements OnInit{
   }
 
   changeRoute(){
-    console.log("Redireción", this.user)
-    if((this.user !== undefined) && (this.loggedMail != null)){
+    console.log("Redireción", this.auth_.user)
+    if((this.auth_.user !== undefined) && (this.loggedMail != null)){
       this.router.navigate(['/perfil']);
     }else{
       this.router.navigate(['/login'])
@@ -40,11 +38,11 @@ export class HeaderComponent implements OnInit{
   }
 
   async getUserImg() {
-    try{
+    /* try{
       await this.storage.ref("Profile_images/" + this.auth_.user?.id)
         .getDownloadURL().subscribe((data) => this.userImg = data);
     }catch(err){
       console.error("Profile: ",err);
-    }
+    } */
   }
 }

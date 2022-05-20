@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CestaPageRoutingModule } from './cesta-routing.module';
 
 import { CestaPage } from './cesta.page';
+import { ReusableModule } from '../reusable/reusable.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CestaPageRoutingModule
+    CestaPageRoutingModule,
+    ReusableModule
   ],
   declarations: [CestaPage]
 })

@@ -4,13 +4,17 @@ import { HeaderComponent } from '../header/HeaderComponent.1';
 import { FooterComponent } from '../footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { OptionListComponent } from '../option-list/option-list.component';
+import { CarritoComponent } from '../carrito/carrito.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    OptionListComponent,
+    CarritoComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { IonicModule } from '@ionic/angular';
   ],
   exports:[
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    OptionListComponent,
+    CarritoComponent
   ]
 })
 

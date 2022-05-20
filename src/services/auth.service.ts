@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { UserMinInfo } from 'src/interfaces/UserMinInfo';
 import { FirestoreService } from './firestore.service';
 import { NewProduct } from 'src/interfaces/newProduct';
+import { Logger } from '@angular-devkit/core/src/logger';
 
 @Injectable({
   providedIn: 'root'
@@ -92,8 +93,10 @@ export class AuthService {
       });
   } 
 
-  commitChange(){
-    this.dbfr.collection("Usuarios")
+  async commitChange(){
+    console.log("ACTUALIZADO");
+    
+    await this.dbfr.collection("Usuarios")
       .doc(this.user.id)
       .set({
         nombre: this.user.nombre,
@@ -107,9 +110,8 @@ export class AuthService {
     this.commitChange();
   }
 
-  pushItemToFavourite(id:string){
-    console.log(this.user)
-    this.db.getAllProducts().then((data:NewProduct[]) => {
+  async pushItemToFavourite(id:string){
+    await this.db.getAllProducts().then((data:NewProduct[]) => {
       for(let i = 0; i < data.length; i++){
         if(data[i].id == id){
           this.user.favoritos.push(data[i]);
@@ -119,9 +121,9 @@ export class AuthService {
     this.commitChange();
   }
 
-  pushItemToCesta(id:string){
+  async pushItemToCesta(id:string){
     console.log(this.user)
-    this.db.getAllProducts().then((data:NewProduct[]) => {
+    await this.db.getAllProducts().then((data:NewProduct[]) => {
       for(let i = 0; i < data.length; i++){
         if(data[i].id == id){
           this.user.cesta.push(data[i]);
