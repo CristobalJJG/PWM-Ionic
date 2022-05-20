@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/interfaces/user';
 import { UserMinInfo } from 'src/interfaces/UserMinInfo';
@@ -17,7 +18,8 @@ export class PerfilPage implements OnInit{
   user:UserMinInfo = undefined;
 
   constructor(public auth:AuthService,
-    private storage: AngularFireStorage) { 
+    private storage: AngularFireStorage,
+    private router: Router) { 
     
   }
 
@@ -50,5 +52,10 @@ export class PerfilPage implements OnInit{
 
   changeName(name:string){
     alert("Name changed from " + this.auth.user?.nombre + " to " + name);
+  }
+
+  logOut(){
+    this.auth.logout();
+    this.router.navigate(['/catalogo']);
   }
 }
