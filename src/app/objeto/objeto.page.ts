@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 import { FirestoreService } from 'src/services/firestore.service';
+import { OfflineDbService } from 'src/services/offline-db.service';
 
 @Component({
   selector: 'app-objeto',
@@ -13,7 +14,8 @@ export class ObjetoPage implements OnInit {
   constructor(private route: ActivatedRoute, 
    /*  private json:JSONService,  */
     private dbService:FirestoreService,
-    private auth: AuthService){}
+    private auth: AuthService,
+    private sqlite:OfflineDbService){}
   objeto:any;
   id:string
   
@@ -38,6 +40,7 @@ export class ObjetoPage implements OnInit {
   }
 
   addFavorito(){
-    this.auth.pushItemToFavourite(this.id);
+    /* this.auth.pushItemToFavourite(this.id); */
+    this.sqlite.addToFavourites(this.objeto);
   }
 }

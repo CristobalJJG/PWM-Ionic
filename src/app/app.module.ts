@@ -29,8 +29,8 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
     AngularFireAuthModule
 ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SQLite,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService
     ],
   bootstrap: [AppComponent],

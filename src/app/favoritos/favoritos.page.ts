@@ -6,6 +6,7 @@ import { NewProduct } from 'src/interfaces/newProduct';
 import { UserMinInfo } from 'src/interfaces/UserMinInfo';
 import { AuthService } from 'src/services/auth.service';
 import { FirestoreService } from 'src/services/firestore.service';
+import { OfflineDbService } from 'src/services/offline-db.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -18,7 +19,8 @@ export class FavoritosPage implements OnInit {
 
   constructor(private auth: AuthService,
     private db: AngularFirestore,
-    private router:Router) { }
+    private router:Router,
+    private sqlite:OfflineDbService) { }
 
   async ngOnInit(){
     this.loggedMail = (await this.auth.getCurrentUser()).email;
@@ -26,7 +28,7 @@ export class FavoritosPage implements OnInit {
    }
 
   async getFavsProducts(){
-    await new Promise<any>((resolve) => {
+    /* await new Promise<any>((resolve) => {
       this.db.collection('Usuarios')
       .valueChanges({ idField: 'id' })
       .subscribe(users => resolve(users));
@@ -36,6 +38,10 @@ export class FavoritosPage implements OnInit {
           this.favs = data[i].favoritos;
         }
       }
+    }); */
+    this.sqlite.getAllFavourites().then((res) => {
+      this.favs = res;
+      console.log(res);
     });
   }
 
