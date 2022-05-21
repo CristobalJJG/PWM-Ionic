@@ -1,0 +1,16 @@
+<div class="gen">
+<div class="carrito">
+  <ul id="articulos">
+      <!--li class="imagen producto" id= 1> Nombre del artículo</li>-->
+      <li *ngFor="let p of cesta"
+        class="imagen producto" id="p.id">
+          {{p.nombre}} - {{p.precio}}€
+      </li>
+      
+  </ul>
+</div>
+<div class="costo">
+  <div>Costo total</div>
+  <p id="costoTotal">{{suma}}</p>
+</div>
+</div>

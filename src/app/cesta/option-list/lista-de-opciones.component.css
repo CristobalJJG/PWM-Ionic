@@ -1,0 +1,54 @@
+.cuadro {
+    background: #ccc;
+    position: relative;
+    padding: 10px;
+    font-size: 25px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid #222;
+    width: 200px;
+    height: 250px;
+    top: 50px;
+    transition: 500ms;
+    box-shadow: 5px 5px 5px #00000025;
+}
+
+.txt {
+    text-decoration: double;
+    color: #222;
+}
+
+.cuadro:hover {
+    background-color: #a9a9a9;
+}
+
+/*Situación de cada cuadro por separado*/
+
+.full {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width:1400px){
+    .cuadro {
+        width: 150px;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .cuadro {
+        width: 300px;
+        height: 60px;
+        font-size: 18px;
+    }
+}

@@ -8,6 +8,7 @@ import { CestaPageRoutingModule } from './cesta-routing.module';
 
 import { CestaPage } from './cesta.page';
 import { ReusableModule } from '../reusable/reusable.module';
+import { CarritoModule } from './carrito.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ReusableModule } from '../reusable/reusable.module';
     FormsModule,
     IonicModule,
     CestaPageRoutingModule,
-    ReusableModule
+    ReusableModule,
+    CarritoModule
   ],
   declarations: [CestaPage]
 })

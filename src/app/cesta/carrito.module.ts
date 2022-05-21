@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/HeaderComponent.1';
-import { FooterComponent } from '../footer/footer.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { OptionListComponent } from './option-list/option-list.component';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
@@ -9,8 +9,8 @@ import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    FooterComponent,
+    CarritoComponent,
+    OptionListComponent
   ],
   imports: [
     CommonModule,
@@ -18,9 +18,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
   exports:[
-    HeaderComponent,
-    FooterComponent,
+    OptionListComponent,
+    CarritoComponent
   ]
 })
-
-export class ReusableModule { }
+export class CarritoModule { }

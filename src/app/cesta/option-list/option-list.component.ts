@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-option-list',
   templateUrl: './option-list.component.html',
-  styleUrls: ['./option-list.component.scss'],
+  styleUrls: ['./lista-de-opciones.component.css'],
 })
 export class OptionListComponent implements OnInit {
 
