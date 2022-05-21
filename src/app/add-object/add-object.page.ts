@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { NewProduct } from 'src/interfaces/newProduct';
@@ -24,7 +26,9 @@ export class AddObjectPage implements OnInit {
   addUbi = "";
 
   constructor(private storage:AngularFireStorage,
-    private fire: FirestoreService) {
+    private fire: FirestoreService,
+    private alert: AlertController,
+    private router:Router) {
       this.extraData = Math.random().toString(36).substring(2);
      }
 
@@ -49,11 +53,18 @@ export class AddObjectPage implements OnInit {
     ).subscribe();
   }
 
-  addObject(){
+  async addObject(){
     this.product.id = this.extraData;
     this.img?.subscribe((data) => {
       this.product.mainPhoto = data;      
       this.fire.addNewProduct(this.product)
     });
+      const alerta = this.alert.create({
+        header: 'Nombre cambiado',
+        message: 'Objeto añadido con éxito, se le cambiará a la página del catálogo.',
+        buttons:['Okey']
+      });
+      (await alerta).present();
+      this.router.navigate(['/catalogo']);
   }
 }

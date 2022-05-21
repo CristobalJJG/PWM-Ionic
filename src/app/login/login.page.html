@@ -62,7 +62,7 @@
                       #nombre = "ngModel" [(ngModel)] = "userRegister.nombre" name="nombre" 
                       pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+" 
                   ></ion-input>
-                  <div class="invalid-feedback" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                  <div class="invalid-feedback" *ngIf="nombre.invalid && nombre.dirty">
                       <div *ngIf="nombre.errors?.['required']">
                           El nombre de usuario es obligatorio.
                       </div> 

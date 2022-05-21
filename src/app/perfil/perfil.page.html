@@ -1,41 +1,54 @@
 <ion-content>
-  <app-header></app-header>
-  <div class="f-gris">
-      <!--Imagen del usuario-->
-      <div class="pict flex">
-          <img *ngIf="userImg == undefined" src="../../assets/images/Logos/Usuario.png" id="userPicture" width="200" height="200">
-          <img *ngIf="userImg != undefined" src="{{userImg}}" id="userPicture" width="200" height="200" />
-          <form>
-            <div class="flex">
-                <label for="chPicture">Cambiar la foto de perfil</label>
-                <!-- <ion-button> -->
-                    <ion-input type="file" (change)="onUpload($event)" accept="image/*" id="chPicture" value="Cambiar Foto"></ion-input> 
-               <!--  </ion-button> -->
+    <app-header></app-header>
+    <div class="f-gris">
+        <!--Imagen del usuario-->
+        <div class="pict flex">
+            <img src="{{userImg}}" id="userPicture" width="200" height="200" />
+            <form>
+                <div class="flex">
+                    <label for="chPicture">Cambiar la foto de perfil</label>
+                    <!-- <ion-button> -->
+                        <ion-input type="file" (change)="onUpload($event)" accept="image/*" id="chPicture" value="Cambiar Foto"></ion-input> 
+                <!--  </ion-button> -->
+                </div>
+                <div *ngIf="showChange">
+                    Recargue la página para ver los cambios
+                </div>
+            </form>
+            <!-- <div>
+                <ion-button type="submit" routerLink="">Compras realizadas</ion-button> 
+            </div> -->
+
+            <div>
+                <ion-button color="danger" (click)="logOut();">Cerrar Sesión</ion-button>
             </div>
-            <div *ngIf="showChange">
-                Recargue la página para ver los cambios
+        </div>
+        <!--Fondo de los datos-->
+        <div class="recuadro">
+            <!--zona de los datos-->
+            <div class="datos">
+                <div class="centrar">
+                    <ion-label for="userName"> Tu nombre:</ion-label>
+                    <ion-input id="userName" #username="ngModel" 
+                        [(ngModel)]="userName" name="userName" 
+                        pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+" 
+                        placeholder="{{auth.user?.nombre}}"></ion-input>
+                        <div class="invalid-feedback" *ngIf="username.invalid && username.dirty">
+                            <div *ngIf="username.errors?.['required']">
+                                El nombre de usuario es obligatorio.
+                            </div> 
+                    
+                            <div *ngIf="username.errors?.['pattern']">
+                                No es un nombre válido.
+                            </div> 
+                        </div>
+                    <ion-button (click)="changeName(userName);">Cambiar nombre</ion-button>
+                </div>
             </div>
-        </form>
-          <div>
-              <ion-button type="submit" routerLink="">Compras realizadas</ion-button> 
-          </div>
-      </div>
-      <!--Fondo de los datos-->
-      <div class="recuadro">
-          <!--zona de los datos-->
-          <div class="datos">
-              <div>
-                  <ion-label for="userName"> Tu nombre:</ion-label>
-                  <ion-input id="userName" #username="ngModel" 
-                    [(ngModel)]="userName" name="userName" 
-                    placeholder="{{auth.user?.nombre}}"></ion-input>
-                  <ion-button (click)="changeName(userName);">Cambiar nombre</ion-button>
-              </div>
-          </div>
-          <div>
-              <ion-button color="danger" (click)="logOut();">Cerrar Sesión</ion-button>
-          </div>
-      </div>
-  </div>
-  <app-footer></app-footer>
+            <div>
+                <ion-button color="secondary" (click)="goToAddProduct();">Añadir Objeto</ion-button>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
 </ion-content>

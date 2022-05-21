@@ -32,7 +32,12 @@ export class LoginPage{
   }
 
   constructor(public auth:AuthService,
-    private route: Router) {}
+    private route: Router) {
+      console.log(this.auth.isLogged)
+      if(this.auth.isLogged){
+        this.route.navigate(['/catalogo']);
+      }
+    }
 
   async login() {
     try{

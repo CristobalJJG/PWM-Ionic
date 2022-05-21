@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit{
   userImg: Observable<string> | undefined;
   public ruta = "/login";
   public nombre:string = "";
-  public user:UserMinInfo = undefined;
   public loggedMail:string = ""
 
   constructor(public auth_: AuthService,
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit{
   
   async ngOnInit(){
     this.loggedMail = (await this.auth_.getCurrentUser()).email;
-    this.user = this.auth_.getUserInfo(this.loggedMail);
+    this.auth_.getUserInfo(this.loggedMail);
     this.getUserImg();
   }
 

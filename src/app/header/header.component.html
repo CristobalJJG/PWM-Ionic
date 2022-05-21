@@ -10,14 +10,11 @@
     <!--Parte del usuario-->
     <div>
         <a (click)="changeRoute();">
-            <div class="cuadro">
-                <img *ngIf="userImg == undefined" src="../../assets/images/Logos/Usuario.png" id="foto-u" class="foto">                
-                <img *ngIf="userImg != undefined" src="{{userImg}}" id="foto-u" class="foto">
-            </div>
             <div>
                 <div>
                     <p *ngIf="loggedMail == ''" id="nombre" class="userName">Iniciar Sesión</p>
                     <p id="nombreUser" class="userName">{{auth_.user?.nombre}}</p>
+                    <p class="perfil">Perfil</p>
                 </div>
             </div>
         </a>

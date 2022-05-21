@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { ReusableModule } from './reusable/reusable.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/services/auth.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,10 +25,10 @@ import { AuthService } from 'src/services/auth.service';
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule,
-    ReusableModule
+    AngularFireAuthModule
 ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService
     ],
   bootstrap: [AppComponent],

@@ -35,7 +35,7 @@ div.flex{
     margin: 0;
     width: 80%;
     height: 70%;
-    margin-left: 2%;
+    margin: 20px 2% ;
     background-color: #d9d8d8;
     border: 1 solid #222;
     box-shadow: 0px 15px 20px #444;
@@ -46,25 +46,18 @@ div.flex{
     flex-direction: column;
 }
 
-input[type="submit"],
-input[type="file"]{
+.centrar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ion-input{
     text-align: center;
-    border-radius: 10px;
-    font-size: large;
-    width: 200px;
-    padding: 10px;
-    background-color: #eee;
-    border: 1px solid #555;
-    margin:10px;
 }
 
-input[type="submit"]:hover,
-input[type="file"]:hover{
-    background-color: #999;
-}
-
-input[type="file"]{
-    display:none
+ion-input::placeholder{
+    text-align: center;
 }
 
 #userPicture {
@@ -72,6 +65,7 @@ input[type="file"]{
     box-shadow: 0px 15px 20px #444;
     border: 3px solid #222;
     border-radius: 100%;
+    margin-bottom: 100px;
 }
 /* Parte de los Objetos*/
 
@@ -141,7 +135,6 @@ div.r-full {
     .f-gris{
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
         align-items: center;
     
     }
@@ -192,5 +185,8 @@ div.r-full {
     }
     p.desc {
         font-size: small;
+    }
+    #userPicture {
+        margin-bottom: 20px;
     }
 }

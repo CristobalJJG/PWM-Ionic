@@ -19,7 +19,7 @@
 }
 /* Nombre de la pagina */
 
-.nombre {
+.nombre{
     font-size: 25px;
     position: relative;
     width: 200px;
@@ -30,10 +30,8 @@
     text-decoration: none;
     transition: all 0.4s;
 }
-
-.nombre p {
-    margin: 0;
-    padding: 0;
+.nombre p{
+    margin-top: 0;
 }
 
 img.foto {
@@ -41,7 +39,6 @@ img.foto {
     height: 40px;
 }
 /* Parte del carrito */
-
 .c-nombre {
     position: relative;
     padding: 0;
@@ -60,30 +57,28 @@ img.foto {
     cursor: pointer;
 }
 /* Parte del Usuario */
-
-.userName {
-    position: relative;
-    margin: 12px 0 0 0px;
-    max-width: 200px;
+.userName, .catalogo, .perfil {
+    margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 20px;
-    right: 5px;
-    float: right;
     cursor: pointer;
+    margin-top: 25px;
+    color: #222;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     transition: all 0.4s ;
 }
 
-#foto-u {
-    position: relative;
-    margin-top: 3px;
-    margin-right: 5px;
+.catalogo{
+    margin-left: 10px;
+    float: left;
+}
+
+.userName, .perfil {
+    margin-right: 20px;
+    margin-top: 15px;
     float: right;
-    cursor: pointer;
-    object-fit: cover;
-    border-radius: 100%;
-    border: 1px solid #222;
 }
 
 a,
@@ -103,15 +98,16 @@ a:visited {
     .sep{
         top: 10px;
     }
-    img.foto,
-    img#foto-u {
+    img.foto{
         margin-top: 10px;
         width: 50px;
         height: 50px;
     }
-    .userName {
+    .userName, .perfil {
         margin-top: 25px;
         font-size: 25px;
+        max-width: 300px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
     }
     .nombre {
         width: 150px;
@@ -121,18 +117,16 @@ a:visited {
         padding-top: 10px;
     }
 }
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-.catalogo{
-    margin-top: 25px;
-    margin-left: 20px;
-    color: #222;
-    font-weight: bolder;
+
+@media screen and (max-width: 700px){
+    p.userName{
+        max-width: 250px;
+    }
 }
+
 @media screen and (max-width:600px){
     p.userName {
-        max-width: 150px;
-        margin-top: 25px;
-        font-size: 20px;
+        max-width: 160px;
     }
     .nombre {
         display: none;
@@ -141,7 +135,9 @@ a:visited {
         width: 35px;
         height: 35px;
     }
-    
+    .perfil{
+        display: block;
+    }
     .phone{
         display: block;
         height: 50px;
@@ -155,6 +151,6 @@ a:visited {
 
 @media screen and (max-width:500px){
     p.userName{
-        max-width: 80px;
+        display: none;
     }
 }
