@@ -4,13 +4,14 @@
       <!--li class="imagen producto" id= 1> Nombre del artículo</li>-->
       <li *ngFor="let p of cesta"
         class="imagen producto" id="p.id">
-          {{p.nombre}} - {{p.precio}}€
+        <img src="{{p.mainPhoto}}">
+        <p class="info">{{p.nombre}} - {{p.precio}}€</p>
       </li>
       
   </ul>
 </div>
 <div class="costo">
   <div>Costo total</div>
-  <p id="costoTotal">{{suma}}</p>
+  <p id="costoTotal">{{suma}}€</p>
 </div>
 </div>

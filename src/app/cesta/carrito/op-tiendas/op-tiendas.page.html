@@ -1,0 +1,28 @@
+<ion-content>
+<app-header></app-header>
+<!--Cuadro con contenido-->
+<div class="recuadro top-l">
+  <!--Cabecera que ponga Ubicacion-->
+  <div class="cabecera">
+      <p class="t-cabecera">Tiendas disponibles</p>
+  </div>
+  <div class="flex-1">
+
+      <!--Cuadro izquierdo con la zona de las tiendas-->
+      <div class="tiendas">
+          <ul id="tiendas">
+              <li class="tienda">CC La Ballena</li>
+              <li class="tienda">CC Los Alisios</li>
+          </ul>
+          <div class="cent">
+            <ion-button [routerLink]="['/cesta/form-tienda']">Continuar</ion-button>
+          </div>
+      </div>
+      <!--Cuadro derecho con el mapa-->
+      <div id="mapa" class="mapa">
+          <div class="t-mapa">Mapa</div>
+      </div>
+  </div>
+  <app-carrito></app-carrito>
+</div>
+</ion-content>

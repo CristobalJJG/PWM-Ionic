@@ -1,0 +1,182 @@
+/*General*/
+
+.flex-1{
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.block{
+    display: inline-block;
+}
+
+.ext-fl{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;    
+    justify-items: center;
+}
+
+
+.recuadro {
+    display: flex;
+    flex-direction: column;
+    background-color: #ddd;
+    border: 1 solid #222;
+    position: absolute;
+    top: 80px;
+    width: 80%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 15px 20px #444;
+}
+
+.cabecera {
+    background-color: #c4c4c4;
+    padding: 2px 0 2px 20px;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.t-cabecera {
+    text-align: center;
+    margin: 10px;
+    font-size: 25px;
+}
+
+
+/*Tiendas*/
+
+.tiendas {
+    width: 50%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+ul {
+    margin:0;
+    padding: 5px;
+}
+
+.tienda {
+    list-style: none;
+    background-color: #bbb;
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    margin: 2px;
+}
+
+
+/*Mapa*/
+
+.mapa {
+    background-color: #222;
+    float: right;
+    width: 60%;
+    border-radius: 0 0 5px 0;
+    height: 100%
+}
+
+.t-mapa {
+    font-size: 30px;
+    color: #ddd;
+    text-align: center;
+}
+
+
+/*inputs sitios*/
+
+ion-button{
+    height: 40px;
+}
+
+.cent{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+::placeholder {
+    color: #444;
+}
+
+
+/*Politica de privacidad*/
+
+.pp {
+    margin: 5px 20px 0 20px;
+    text-align: center;
+}
+
+/* Métodos de pago */
+
+.pago {
+    list-style: none;
+    text-align: center;
+    background-color: #bbb;
+    width: 150px;
+    height: 20px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    transition: 300ms;
+}
+
+.pago:hover {
+    background-color: #999;
+}
+
+#costoTotal {
+    margin: 0;
+}
+
+.costo{
+    border-radius: 10px;
+}
+
+.invalid-feedback{
+    color:#222;
+    background-color: rgb(211, 78, 78);
+    box-shadow: 0px 2px 5px rgb(211, 78, 78);
+    border-radius: 5px;
+    width: 80%;
+    padding: 2px 15px;
+    margin-left: 5%;
+}
+
+.invalid-feedback div{
+    font-size: small;
+}
+
+@media screen and (max-width:750px) {
+    body {
+        overflow: hidden;
+    }
+    .ext-fl{
+        display: grid;
+        justify-content: center;
+    }
+    .recuadro {
+        width: 80%;
+        height: auto;
+        left: 0;
+        top: 0;
+        margin-top: 80px;
+        margin-left: 10%;
+    }
+    .carrito {
+        margin-top: 20px;
+    }
+    .top-l {
+        margin-top: 25%;
+    }
+    label[for="checkbox"]{
+        font-size: small;
+    }
+    .costo {
+        width: 95%;
+    }
+}

@@ -1,0 +1,142 @@
+<ion-content>
+  <app-header></app-header>
+  <!--Parte de arriba-->
+  <div class="recuadro">
+      <div class="cabecera">
+          <p class="t-cabecera">Datos de envío</p>
+      </div>
+      <div class="ext-fl cent">
+          <form #forma="ngForm">
+              <!--Nombre completo-->
+              <div class="block">
+                  <div>
+                      <ion-input type="text" placeholder="Nombre" id="nombre" class=" inp-txt" required
+                      #nombre = "ngModel" [(ngModel)] = "userInfo.nombre" name="nombre" 
+                          pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"></ion-input>
+                          <div class="invalid-feedback" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                              <div *ngIf="nombre.errors?.['required']">
+                                  El nombre es obligatorio.
+                              </div> 
+                      
+                              <div *ngIf="nombre.errors?.['pattern']">
+                                  No es un nombre válido.
+                              </div> 
+                          </div>
+                  </div>
+                  <div>
+                      <ion-input type="text" placeholder="Apellido" id="apellido" class="inp-txt der" required
+                      #apellido = "ngModel" [(ngModel)] = "userInfo.apellidos" name="apellido" 
+                          pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"></ion-input>
+                          <div class="invalid-feedback" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                              <div *ngIf="apellido.errors?.['required']">
+                                  El apellido es obligatorio.
+                              </div> 
+                      
+                              <div *ngIf="apellido.errors?.['pattern']">
+                                  No es un apellido válido.
+                              </div> 
+                          </div>
+                  </div>
+              </div>
+              <!--Contacto-->
+              <div class="block">
+                  <div>
+                      <ion-input type="tel" id="numTel" pattern="[6-7][0-9]{8}" placeholder="Número de teléfono" class="inp-txt der" required
+                      #telefono = "ngModel" [(ngModel)] = "userInfo.telefono" name="telefono"></ion-input>
+                          <div class="invalid-feedback" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+                              <div *ngIf="telefono.errors?.['required']">
+                                  Un nº de teléfono es obligatorio.
+                              </div> 
+                      
+                              <div *ngIf="telefono.errors?.['pattern']">
+                                  No es un número válido.
+                              </div> 
+                          </div>
+                      
+                  </div>
+                  <div>
+                      <ion-input type="email" name="email" id="email" placeholder="nano@gmail.com" class=" inp-txt" required
+                      #correo = "ngModel" [(ngModel)] = "userInfo.correo" name="correo"
+                      pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"></ion-input>
+                      <div class="invalid-feedback" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+                          <div *ngIf="correo.errors?.['required']">
+                              El correo obligatorio.
+                          </div> 
+                          <div *ngIf="correo.errors?.['pattern']">
+                              No es un correo válido.
+                          </div> 
+                      </div>
+                  </div>
+              </div>
+              <!--Ubicación-->
+              <div class="block">
+                  <div>  
+                      <ion-input type="text" name="direccion" id="direccion" class=" inp-txt  der" required placeholder="Dirección"
+                      #direccion = "ngModel" [(ngModel)] = "userInfo.direccion" name="direccion"
+                      pattern="[a-z A-Z]+"></ion-input>
+                      <div class="invalid-feedback" *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+                          <div *ngIf="direccion.errors?.['required']">
+                              La dirección es obligatoria.
+                          </div> 
+                          <div *ngIf="direccion.errors?.['pattern']">
+                              No es una direción válida.
+                          </div> 
+                      </div>
+                  </div>
+                  <div>
+                      <ion-input type="text" name="codPostal" id="codPostal" class=" inp-txt" placeholder="Código Postal"
+                      #codPostal = "ngModel" [(ngModel)] = "userInfo.codPostal" name="codPostal" required></ion-input>
+                      <div class="invalid-feedback" *ngIf="codPostal.invalid && (codPostal.dirty || codPostal.touched)">
+                          <div *ngIf="codPostal.errors?.['required']">
+                              El Código Postal es obligatorio.
+                          </div> 
+                          <div *ngIf="codPostal.errors?.['pattern']">
+                              No es un Código Postal válido.
+                          </div> 
+                      </div>
+                  </div>
+              </div>
+              <div class="block">
+                  <div>
+                      <ion-input type="text" name="ciudad" id="ciudad" pattern="[A-Za-z- ]+" class=" inp-txt" placeholder="CIudad"
+                      #ciudad = "ngModel" [(ngModel)] = "userInfo.ciudad" name="ciudad" required></ion-input>
+                      <div class="invalid-feedback" *ngIf="ciudad.invalid && (ciudad.dirty || ciudad.touched)">
+                          <div *ngIf="ciudad.errors?.['required']">
+                              La ciudad es obligatoria.
+                          </div> 
+                          <div *ngIf="ciudad.errors?.['pattern']">
+                              No es una ciudad válida.
+                          </div> 
+                      </div>
+                  </div>
+                  <div>
+                      <ion-input type="text" name="provincia" id="provincia" pattern="[A-Za-z- ]+" class=" inp-txt" placeholder="Provincia"
+                      #provincia = "ngModel" [(ngModel)] = "userInfo.provincia" name="provincia" required></ion-input>
+                      <div class="invalid-feedback" *ngIf="provincia.invalid && (provincia.dirty || provincia.touched)">
+                          <div *ngIf="provincia.errors?.['required']">
+                              El correo obligatorio.
+                          </div> 
+                          <div *ngIf="provincia.errors?.['pattern']">
+                              No es un correo válido.
+                          </div> 
+                      </div>
+                  </div>
+              </div>
+  
+              <!--Parte de las políticas de privacidad-->
+              <div class="pp">
+                  <ion-checkbox #check type="checkbox" (change)="false" id="checkbox"></ion-checkbox>
+                  <label for="checkbox">
+                      He podido leer y entiendo que si clico este <em>checkbox</em>, el alumno 
+                      Cristóbal José Jiménez Gómez aprobará PWM.
+                  </label>
+              </div>
+              <div class="cent">
+                  <ion-button type="submit" [disabled]="forma.invalid || !check.checked" id="btnConfirm"
+                  [routerLink]="['/cesta/pago-envio']">Confirmar datos</ion-button>
+              </div>
+          </form>
+      </div>
+      <app-carrito></app-carrito>
+  </div>
+</ion-content>

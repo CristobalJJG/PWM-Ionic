@@ -1,8 +1,3 @@
-body{
-    overflow-x: hidden;
-}
-
-
 .gen{
     display:flex;
     flex-direction: column;
@@ -14,7 +9,7 @@ body{
 
 .carrito {
     background-color: #a9a9a9;
-    height: 50%;
+    height: 280px;
     overflow-x: auto;
     box-shadow: 5px 5px 5px #00000025;
 }
@@ -24,16 +19,23 @@ body{
     background-color: #bbb;
     width: 150px;
     margin: 5px;
-    height: 90%;
+    margin-top: 15px;
     box-shadow: 5px 5px 5px #00000025;
 }
+
+.info{
+    margin: 0;
+    padding: 0 15px
+    
+}
+
 
 #articulos {
     margin: 0;
     padding: 0;
     width: auto;
     display: inline-flex;
-    height: 225px;
+    height: 270px;
 }
 
 #articulos::after {
@@ -71,9 +73,14 @@ input[type="submit"]:hover {
     text-align: center;
 }
 
-@media screen and (max-width:960px) {
-    .imagen {
-        width: 150px;
-        height: 200px;
+@media screen and (min-height: 750px){
+    .costo{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (min-height: 850px){
+    .costo{
+        margin-top: 30px;
     }
 }

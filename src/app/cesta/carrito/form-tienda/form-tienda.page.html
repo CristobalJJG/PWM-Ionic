@@ -1,0 +1,87 @@
+<ion-content>
+  <div class="recuadro">
+    <div class="cabecera">
+        <p class="t-cabecera">Datos de Recogida</p>
+    </div>
+    <form #forma="ngForm">
+        <div class="ext-fl">
+            <!--Nombre completo-->
+            <div>
+                <div>
+                    <ion-input type="text" placeholder="Nombre" id="nombre" class=" inp-txt" required
+                    #nombre = "ngModel" [(ngModel)] = "userInfo.nombre" name="nombre" 
+                    pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"></ion-input>
+                    <div class="invalid-feedback" *ngIf="nombre.invalid && nombre.dirty">
+                        <div *ngIf="nombre.errors?.['required']">
+                            El nombre es obligatorio.
+                        </div> 
+                
+                        <div *ngIf="nombre.errors?.['pattern']">
+                            No es un nombre válido.
+                        </div> 
+                    </div>
+                </div>
+                <div>
+                    <ion-input type="text" placeholder="Apellido" id="apellido" class="inp-txt der" required
+                    #apellido = "ngModel" [(ngModel)] = "userInfo.apellidos" name="apellido" 
+                    pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"></ion-input>
+                    <div class="invalid-feedback" *ngIf="apellido.invalid && apellido.dirty">
+                        <div *ngIf="apellido.errors?.['required']">
+                            El apellido es obligatorio.
+                        </div> 
+                
+                        <div *ngIf="apellido.errors?.['pattern']">
+                            No es un apellido válido.
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <!--Contacto-->
+            <div>
+                <div>
+                    <ion-input type="tel" id="numTel" pattern="[6-7][0-9]{8}" placeholder="Número de teléfono" class="inp-txt der" required
+                    #telefono = "ngModel" [(ngModel)] = "userInfo.telefono" name="telefono"></ion-input>
+                    <div class="invalid-feedback" *ngIf="telefono.invalid && telefono.dirty">
+                        <div *ngIf="telefono.errors?.['required']">
+                            Un nº de teléfono es obligatorio.
+                        </div> 
+                
+                        <div *ngIf="telefono.errors?.['pattern']">
+                            No es un número válido.
+                        </div> 
+                    </div>
+                </div>
+                <div>
+                    <ion-input type="email" name="email" id="email" placeholder="nano@gmail.com" class=" inp-txt" required
+                    pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
+                    #correo = "ngModel" [(ngModel)] = "userInfo.correo" name="correo"></ion-input>
+                    <div class="invalid-feedback" *ngIf="correo.invalid && correo.dirty">
+                        <div *ngIf="correo.errors?.['required']">
+                            El correo obligatorio.
+                        </div> 
+                        <div *ngIf="correo.errors?.['pattern']">
+                            No es un correo válido.
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Parte de las políticas de privacidad-->
+        <div class="pp">
+            <ion-checkbox #check (change)="false" id="checkbox"></ion-checkbox>
+            <label for="checkbox">
+                He podido leer y entiendo la información sobre el uso de mis datos 
+                personales explicada en la política de privacidad
+            </label>
+            <div class="invalid-feedback" *ngIf="!check.checked">
+                    Es obligatorio aceptar.
+            </div>
+        </div>
+        <div class="cent">
+            <ion-button [disabled]="forma.invalid || !check.checked" id="btnConfirm"
+            [routerLink]="['/cesta/pago-tienda']">Confirmar compra</ion-button>
+        </div>
+    </form>
+    <app-carrito></app-carrito>
+</div>
+</ion-content>

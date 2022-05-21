@@ -21,22 +21,6 @@ const routes: Routes = [
   { path: '**', loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule) },
 ];
 
-/* const routes: Routes = [
-  {path:'', component:CatalogoPage},
-  {path:"catalogo", component: CatalogoPage},
-  {path:"login", component: LoginPage},
-  {path:'cesta', component:CestaPage}, 
-  {path:'op-tienda', component:OpcionTiendaComponent},
-  {path:'op-domicilio', component:OpcionDomicilioComponent},
-  {path:'form-tienda', component:FormCortoComponent},
-  {path:'pay', component:PayComponent}, 
-  {path:'add-object', component:AddObjectPage},
-  {path:'perfil', component:PerfilPage},
-  {path:'favoritos', component:FavoritosPage},
-  {path:'objeto/:id', component:ObjetoPage},
-  {path:'**', component:NotFoundPage},
-]; */
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes/* , {preloadingStrategy: PreloadAllModules} */)

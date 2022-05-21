@@ -9,7 +9,7 @@
     border: 2px solid #222;
     width: 200px;
     height: 250px;
-    top: 50px;
+    top: 10px;
     transition: 500ms;
     box-shadow: 5px 5px 5px #00000025;
 }
@@ -27,7 +27,7 @@
 
 .full {
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .flex {

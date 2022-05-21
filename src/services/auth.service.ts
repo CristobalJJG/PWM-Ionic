@@ -18,6 +18,9 @@ import { Logger } from '@angular-devkit/core/src/logger';
 export class AuthService {
   public isLogged:any = false;
   private _user: UserMinInfo = undefined;
+  private nombre;
+  private favs;
+  private cesta;
 
   constructor(private afAuth: AngularFireAuth,
     private dbfr: AngularFirestore,
@@ -68,6 +71,9 @@ export class AuthService {
       for(let i = 0; i < data.length; i++){
         if(data[i].id === shortM){
           this.user = data[i];
+          this.nombre = this.user.nombre;
+          this.favs = this.user.favoritos;
+          this.cesta = this.user.cesta;
           return data[i];
         }
       }
@@ -87,11 +93,43 @@ export class AuthService {
     this.dbfr.collection("Usuarios")
       .doc(user_.correo.split("@")[0])
       .set({
-        nombre:user_.nombre,
+        nombre: user_.nombre,
         favoritos: user_.favorito,
         cesta: user_.cesta
       });
   } 
+
+/*--------------- Acualizar datos del usuario ---------------*/
+  updateName(name:string){
+    this.user.nombre=name;
+    this.nombre=this.user.nombre;
+    this.commitChange();
+  }
+
+  async pushItemToFavourite(id:string){
+    await this.db.getAllProducts().then((data:NewProduct[]) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].id == id){
+          this.user.favoritos.push(data[i]);
+          this.favs = this.user.favoritos;
+        }
+      }
+    })
+    this.commitChange();
+  }
+
+  async pushItemToCesta(id:string){
+    console.log(this.user)
+    await this.db.getAllProducts().then((data:NewProduct[]) => {
+      for(let i = 0; i < data.length; i++){
+        if(data[i].id == id){
+          this.user.cesta.push(data[i]);
+          this.cesta = this.user.cesta;
+        }
+      }
+    })
+    this.commitChange();
+  }
 
   async commitChange(){
     console.log("ACTUALIZADO");
@@ -105,31 +143,17 @@ export class AuthService {
       });
   }
 
-  updateName(name:string){
-    this.user.nombre=name;
-    this.commitChange();
-  }
-
-  async pushItemToFavourite(id:string){
-    await this.db.getAllProducts().then((data:NewProduct[]) => {
-      for(let i = 0; i < data.length; i++){
-        if(data[i].id == id){
-          this.user.favoritos.push(data[i]);
-        }
-      }
-    })
-    this.commitChange();
-  }
-
-  async pushItemToCesta(id:string){
-    console.log(this.user)
-    await this.db.getAllProducts().then((data:NewProduct[]) => {
-      for(let i = 0; i < data.length; i++){
-        if(data[i].id == id){
-          this.user.cesta.push(data[i]);
-        }
-      }
-    })
-    this.commitChange();
+  async deleteCesta(){
+    console.log("vaciado de cesta");
+    console.log("nombre", this.nombre);
+    console.log("favs",this.favs);
+    
+    await this.dbfr.collection("Usuarios")
+      .doc(this._user.id.split("@")[0])
+      .set({
+        nombre: this.nombre,
+        favoritos: this.favs,
+        cesta: []
+      });
   }
 }

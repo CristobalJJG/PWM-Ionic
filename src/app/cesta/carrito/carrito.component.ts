@@ -23,10 +23,7 @@ export class CarritoComponent implements OnInit {
 
   async ngOnInit() {
     this.loggedMail = (await this.auth.getCurrentUser()).email;
-    this.getCestaProducts();
-    console.log("suma", this.suma);
-    console.log("cesta", this.cesta);
-    
+    this.getCestaProducts();    
   }
 
   async getCestaProducts(){
@@ -38,19 +35,13 @@ export class CarritoComponent implements OnInit {
       for(let i = 0; i < data.length; i++){
         if(data[i].id == this.loggedMail.split("@")[0]){
           this.cesta = data[i].cesta;
-          this.getSuma();
+          var n:number = 0;
+          for(let i = 0; i < this.cesta?.length; i++){
+            n = n + this.cesta[i]?.precio;
+          }
+          this.suma = n;
         }
       }
     });
   }
-
-  async getSuma(){
-    let n:number;
-    for(let i = 0; i < this.cesta?.length; i++){
-      n += parseFloat(this.cesta[i]?.precio);
-      console.log(n)
-    }
-    this.suma = n;
-  }
-
 }

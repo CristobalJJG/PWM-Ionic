@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { ReusableModule } from './reusable/reusable.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/services/auth.service';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AuthService } from 'src/services/auth.service';
 ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SQLite,
     AuthService
     ],
   bootstrap: [AppComponent],
