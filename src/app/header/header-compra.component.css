@@ -69,6 +69,9 @@ img.foto {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     transition: all 0.4s ;
 }
+.perfil{
+    display: none;
+}
 
 .catalogo{
     margin-left: 10px;
@@ -103,7 +106,7 @@ a:visited {
         width: 50px;
         height: 50px;
     }
-    .userName, .perfil {
+    .userName {
         margin-top: 25px;
         font-size: 25px;
         max-width: 300px;
@@ -137,6 +140,10 @@ a:visited {
     }
     .perfil{
         display: block;
+        margin-top: 25px;
+        font-size: 25px;
+        max-width: 300px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
     }
     .phone{
         display: block;
@@ -144,12 +151,6 @@ a:visited {
         float: left;
         text-decoration: none;
     }
-
-
-
-}
-
-@media screen and (max-width:500px){
     p.userName{
         display: none;
     }

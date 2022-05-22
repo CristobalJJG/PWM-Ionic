@@ -49,4 +49,8 @@ export class FavoritosPage implements OnInit {
     this.router.navigate(["objeto", id]);
   }
 
+   deleteFavourites(){
+    /* this.sqlite.removeAllFromFavs(); */
+  } 
+
 }

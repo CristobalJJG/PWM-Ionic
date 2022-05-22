@@ -5,6 +5,10 @@
       <div class="cent">
           <h1>Favoritos</h1>
       </div>
+
+      <!-- <div>
+        <ion-button color="warning" (click)="deleteFavourites();">Borrar Favoritos</ion-button>
+      </div> -->
       <div class="padre">
         <div *ngFor="let p of favs" class="imagen">
           <a (click)="goToObject(p.id)">

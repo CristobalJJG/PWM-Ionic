@@ -28,7 +28,7 @@
                   </div>
                   <!--Botón para acceder-->
                   <div>
-                      <ion-input type="submit" id="btnLogin" (click)="login();" value="Iniciar Sesión" [disabled]="forma1.invalid"></ion-input>
+                      <ion-button id="btnLogin" (click)="login();" [disabled]="forma1.invalid">Iniciar Sesión</ion-button>
                   </div>
               </form>
           </div>
@@ -88,7 +88,7 @@
               </div>
               <!--Botón para acceder-->
               <div class="cent">
-                  <ion-input type="submit" (click)="register();" id="btnRegister" value="Enviar" [disabled]="forma2.invalid"></ion-input>
+                  <ion-button (click)="register();" id="btnRegister" [disabled]="forma2.invalid">Registrarse</ion-button>
               </div>
           </form>
       </div>
