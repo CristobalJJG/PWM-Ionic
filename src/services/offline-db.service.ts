@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { AlertController } from '@ionic/angular';
 import { NewProduct } from 'src/interfaces/newProduct';
 
 @Injectable({
@@ -9,16 +10,19 @@ export class OfflineDbService {
   
   private dbInstance: SQLiteObject;
   readonly db_name:string = "favs.db";
-  private isOpen:boolean;
-  readonly db_table = "usertable"
+  private isOpen:boolean = false;
+  readonly db_table = "userTable"
   favs:Array<any>
 
-  constructor(private database:SQLite) { 
-      if(!this.isOpen){this.databaseConn();}
+  constructor(private database:SQLite, 
+    private alert:AlertController) { 
+      if(!this.isOpen){
+        this.databaseConn();
+        this.isOpen = true;
+      }
   }
 
   databaseConn() {
-    this.database = new SQLite();
     return this.database.create({name: this.db_name, location: 'default'})
     .then((sqLite: SQLiteObject) => {
     this.dbInstance = sqLite;
@@ -31,10 +35,19 @@ export class OfflineDbService {
       "categoria"	TEXT NOT NULL,
       "mainPhoto"	TEXT NOT NULL,
       PRIMARY KEY("id")`, [] )
-    .then((res) => { alert(JSON.stringify(res)); } )
-    .catch((error) => alert(JSON.stringify(error)));
-    })
-    .catch((error) => alert(JSON.stringify(error)));
+    .then((res) => { 
+      this.alert.create({header: 'Error',
+        message: JSON.stringify(res),
+        buttons:['Okey'] }); 
+    }).catch((error) => alert(
+      this.alert.create({header: 'Error',
+        message: JSON.stringify(error),
+        buttons:['Okey'] })
+    ));})
+    .catch((error) => 
+      this.alert.create({header: 'Error',
+        message: JSON.stringify(error),
+        buttons:['Okey'] }));
   }
 
     getAllFavourites():Promise<any>{
@@ -48,7 +61,9 @@ export class OfflineDbService {
           return this.favs;
       }
       },(e) => {
-        alert(JSON.stringify(e));
+        this.alert.create({header: 'Error',
+          message: JSON.stringify(e),
+          buttons:['Okey'] });
       });
     }
 
@@ -59,6 +74,10 @@ export class OfflineDbService {
         '${product.precio}', '${product.categoria}','${product.mainPhoto}')`, [])
       .then(() => {
         this.getAllFavourites();
-      }, (e) => { alert(JSON.stringify(e.err)); });
+      }, (e) => { 
+        this.alert.create({header: 'Error',
+        message: JSON.stringify(e),
+        buttons:['Okey'] })
+      });
     }
 }
